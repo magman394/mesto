@@ -1,0 +1,6 @@
+.photo-grid__item {
+  max-width: 100%;
+  width: 1184px;
+  height: 100%;
+  object-fit: cover;
+}
