@@ -10,3 +10,10 @@
   right: -30px;
   cursor: pointer;
 }
+@media (max-width: 320px) {
+  .form__is-closed {
+    max-width: 26px;
+    top: -60px;
+    right: 19px;
+  }
+}

@@ -18,6 +18,12 @@
   transition: opacity 0.4s ease-in-out;
 }
 
+@media (max-width: 320px) {
+  .form__submit {
+    margin-bottom: 25px;
+  }
+}
+
 .form__submit:hover {
   opacity: 0.8;
 }
