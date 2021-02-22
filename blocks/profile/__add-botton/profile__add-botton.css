@@ -1,0 +1,9 @@
+.profile__add-botton {
+    background: black;
+    border: 2px solid #fff;
+    max-width: 100%;
+    width: 150px;
+    height: 50px;
+    object-fit: cover;
+    margin-left: auto;
+}
