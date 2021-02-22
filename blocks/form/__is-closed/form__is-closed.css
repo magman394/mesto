@@ -1,0 +1,12 @@
+.form__is-closed {
+  color: white;
+  max-width: 40px;
+  background: transparent;
+  border: none;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: -50px;
+  right: -30px;
+  cursor: pointer;
+}

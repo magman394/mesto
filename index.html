@@ -15,55 +15,66 @@
   </header>
   <main class="content">
     <section class="profile">
-        <img class="profile__avatar" src="./images/avatar-image.jpg">
+        <img class="profile__avatar" src="./images/avatar-image.jpg" alt="аватарка">
         <div class="profile__profile-info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <h2 class="profile__profession">Исследователь океана</h2>
+          <div class="profile__edit-name">
+            <h1 class="profile__name"></h1>
+            <button type="button" class="profile__edit-botton opacity-link"><img src="./images/edit-botton.png" alt="кнопка редактирования"></button>
+          </div>
+          <h2 class="profile__profession"></h2>
         </div>
-        <button type="button" class="profile__edit-botton"><img src="./images/edit-botton.png"></button>
-      <button class="profile__add-botton"><img src="./images/add-botton.png"></button>
+      <button class="profile__add-botton opacity-link"><img src="./images/add-botton.png" alt="кнопка добавления"></button>
+      <div class="form">
+        <div class="form__content">
+          <button type="button" class="form__is-closed opacity-link"><img src="./images/Close-Icon.png" alt="кнопка закрытия"></button>
+          <h2 class="form__title">Редактировать профиль</h2>
+          <input id="firstName" class="form__input" placeholder="Жак-Ив Кусто">
+          <input id="lastName" class="form__input" placeholder="Исследователь океана">
+          <button id="save" type="submit" class="form__submit">Сохранить</button>
+        </div>
+      </div>
     </section>
     <section class="elements">
       <div class="element">
         <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
         <div class="element__info">
           <h3 class="element__title">Карачаевск</h3>
-          <button type="button" class="element__like"><img src="./images/like.png" alt="like"></button> 
+          <button type="button" class="element__like"></button>
       </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
         <div class="element__info">
           <h3 class="element__title">Гора Эльбрус</h3>
-          <button type="button" class="element__like"><img src="./images/like.png" alt="like"></button> 
+          <button type="button" class="element__like"></button>
         </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
         <div class="element__info">
           <h3 class="element__title">Домбай</h3>
-          <button type="button" class="element__like"><img src="./images/like.png" alt="like"></button> 
+          <button type="button" class="element__like"></button>
         </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
         <div class="element__info">
           <h3 class="element__title">Гора Эльбрус</h3>
-          <button type="button" class="element__like"><img src="./images/like.png" alt="like"></button> 
+          <button type="button" class="element__like"></button>
           </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
         <div class="element__info">
           <h3 class="element__title">Домбай</h3>
-          <button type="button" class="element__like"><img src="./images/like.png" alt="like"></button> 
+          <button type="button" class="element__like"></button>
         </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия">
         <div class="element__info">
           <h3 class="element__title">Карачаево-Черкесия</h3>
-          <button type="button" class="element__like"><img src="./images/like.png" alt="like"></button> 
+          <button type="button" class="element__like"></button>
         </div>
       </div>
     </section>
@@ -72,5 +83,6 @@
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
 </div>
+<script src="./blocks/scripts/index.js"></script>
 </body>
 </html>

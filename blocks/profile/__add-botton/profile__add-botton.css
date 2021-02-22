@@ -6,4 +6,12 @@
     height: 50px;
     object-fit: cover;
     margin-left: auto;
+    cursor: pointer;
 }
+@media (max-width: 320px) {
+  .profile__add-botton {
+    width: 282px;
+    margin-left: 0;
+  }
+}
+
