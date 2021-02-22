@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  margin: 92px 48px 24px;
+  margin: 66px 0 60px;
 }
 @media (max-width: 768px) {
   .footer {
