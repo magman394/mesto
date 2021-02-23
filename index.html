@@ -11,28 +11,18 @@
 <div class="page">
   <header class="header">
     <div class="header__logo"></div>
-    <div class="header__line"></div>
   </header>
   <main class="content">
     <section class="profile">
         <img class="profile__avatar" src="./images/avatar-image.jpg" alt="аватарка">
         <div class="profile__profile-info">
           <div class="profile__edit-name">
-            <h1 class="profile__name"></h1>
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button type="button" class="profile__edit-botton opacity-link"><img src="./images/edit-botton.png" alt="кнопка редактирования"></button>
           </div>
-          <h2 class="profile__profession"></h2>
+          <h2 class="profile__profession">Исследователь океана</h2>
         </div>
-      <button class="profile__add-botton opacity-link"><img src="./images/add-botton.png" alt="кнопка добавления"></button>
-      <div class="form">
-        <div class="form__content">
-          <button type="button" class="form__is-closed opacity-link"><img src="./images/Close-Icon.png" alt="кнопка закрытия"></button>
-          <h2 class="form__title">Редактировать профиль</h2>
-          <input id="firstName" class="form__input" placeholder="Жак-Ив Кусто">
-          <input id="lastName" class="form__input" placeholder="Исследователь океана">
-          <button id="save" type="submit" class="form__submit">Сохранить</button>
-        </div>
-      </div>
+      <button type="submit" class="profile__add-botton opacity-link"><img src="./images/add-botton.svg" alt="кнопка добавления"></button>
     </section>
     <section class="elements">
       <div class="element">
@@ -79,10 +69,21 @@
       </div>
     </section>
   </main>
+  <div class="popup">
+    <div class="popup__container">
+      <button type="button" class="popup__close opacity-link"><img src="./images/Close-Icon.svg" alt="кнопка закрытия"></button>
+      <form class="form">
+        <h2 class="form__title">Редактировать профиль</h2>
+        <input id="firstName" type="text" class="form__input" placeholder="Жак-Ив Кусто">
+        <input id="lastName" type="text" class="form__input" placeholder="Исследователь океана">
+        <button id="save" type="submit" class="form__submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
 </div>
-<script src="./blocks/scripts/index.js"></script>
+<script src="./scripts/index.js"></script>
 </body>
 </html>

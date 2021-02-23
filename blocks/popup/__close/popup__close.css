@@ -1,4 +1,4 @@
-.form__is-closed {
+.popup__close {
   color: white;
   max-width: 40px;
   background: transparent;
@@ -10,8 +10,8 @@
   right: -30px;
   cursor: pointer;
 }
-@media (max-width: 320px) {
-  .form__is-closed {
+@media (max-width: 500px) {
+  .popup__close {
     max-width: 26px;
     top: -60px;
     right: 19px;

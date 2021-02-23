@@ -5,4 +5,16 @@
   width: 282px;
   height: 100%;
   object-fit: cover;
+  justify-self: center;
+}
+@media (max-width: 680px) {
+  .element {
+    width: 200px;
+  }
+}
+@media (max-width: 450px) {
+  .element {
+    align-content: center;
+    width: 282px;
+  }
 }

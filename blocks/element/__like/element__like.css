@@ -1,16 +1,19 @@
 .element__like {
-    width: 22px;
-    height: 19px;
-    border: none;
-    background-image: url(../../../images/like.svg);
-    background-color: white;
-    padding: 0;
-    outline: none;
+  width: 22px;
+  height: 19px;
+  border: none;
+  background-image: url(../../../images/like.svg);
+  background-color: white;
+  padding: 0;
+  outline: none;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
 }
 .element__like:hover {
-cursor: pointer;
+  cursor: pointer;
+  opacity: 0.5;
 }
 .element__like:active {
-  background-image: url(../../../images/like-active.png);
-
+  background-image: url(../../../images/like-active.svg);
+  opacity: 1;
   }

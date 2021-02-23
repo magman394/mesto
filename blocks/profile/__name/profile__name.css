@@ -9,8 +9,9 @@
     white-space: nowrap;
     overflow: hidden;
 }
-@media (max-width: 320px) {
+@media (max-width: 500px) {
   .profile__name {
+    max-width: 200px;
     font-size: 27px;
     line-height: 33px;
     text-align: center;

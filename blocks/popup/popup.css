@@ -1,4 +1,4 @@
-.form {
+.popup {
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
@@ -11,7 +11,7 @@
 }
 
 @media (max-width: 320px) {
-  .form {
+  .popup {
     top: -300px;
     margin: 0 19px;
   }
