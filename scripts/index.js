@@ -9,6 +9,8 @@ let lastName = document.querySelector('#lastName');
 let formLissener = document.querySelector('form');
 
 function showPopup() {
+  firstName.value = firstNameContainer.textContent
+  lastName.value = lastNameContainer.textContent
   showForm.classList.toggle('form_is-opened');
 }
 
@@ -19,9 +21,7 @@ function closePopup() {
 
 function addName(event) {
   event.preventDefault();
-  firstNameContainer.textContent = '';
   firstNameContainer.textContent = firstName.value;
-  lastNameContainer.textContent = '';
   lastNameContainer.textContent = lastName.value;
     firstName.value = '';
     lastName.value = '';
