@@ -11,11 +11,11 @@ let formLissener = document.querySelector('form');
 function showPopup() {
   firstName.value = firstNameContainer.textContent
   lastName.value = lastNameContainer.textContent
-  showForm.classList.toggle('form_is-opened');
+  showForm.classList.toggle('popup_is-opened');
 }
 
 function closePopup() {
-  showForm.classList.toggle('form_is-opened');
+  showForm.classList.toggle('popup_is-opened');
 }
 
 
