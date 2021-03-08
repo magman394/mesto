@@ -159,7 +159,9 @@ function addTaskFormListener(event) {
 	const newTask = createTaskDomNode({ name: inputTitle, link: inputLink });
 
 	addTaskListeners(newTask);
-
+  newTask.querySelector('.element__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__like_active');
+    });
 	boxCards.prepend(newTask);
 
 	input.value = '';
