@@ -107,6 +107,7 @@ function createTaskDomNode(item){
 	title.textContent = item.name;
   const link = newItem.querySelector('#cardLink');
   link.src = item.link;
+  link.alt = item.name;
 
   link.addEventListener('click',function showPopupImg() {
     bigImg.classList.toggle('popup-image_is-opened');
