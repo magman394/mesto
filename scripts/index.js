@@ -115,6 +115,7 @@ function createTaskDomNode(item){
     const closeImg = document.querySelector('.popup-image__close');
     titleImg.textContent = title.textContent;
     popupImg.src = link.src;
+    popupImg.alt = title.textContent;
 
     closeImg.addEventListener('click', closePopupImg);
   });
