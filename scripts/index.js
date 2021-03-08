@@ -107,6 +107,7 @@ function createTaskDomNode(item){
 	title.textContent = item.name;
   const link = newItem.querySelector('#cardLink');
   link.src = item.link;
+  link.alt = item.name;
 
   link.addEventListener('click',function showPopupImg() {
     bigImg.classList.toggle('popup-image_is-opened');
@@ -115,6 +116,7 @@ function createTaskDomNode(item){
     const closeImg = document.querySelector('.popup-image__close');
     titleImg.textContent = title.textContent;
     popupImg.src = link.src;
+    popupImg.alt = title.textContent;
 
     closeImg.addEventListener('click', closePopupImg);
   });
