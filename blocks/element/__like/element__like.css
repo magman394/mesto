@@ -13,3 +13,6 @@
   cursor: pointer;
   opacity: 0.5;
 }
+.element__like:focus {
+  opacity: 1;
+}
