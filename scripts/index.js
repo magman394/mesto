@@ -1,4 +1,16 @@
 
+let showFormBotton = document.querySelector('.profile__edit-botton')
+let showForm = document.querySelector('#popupAutor');
+let closeFormBotton = document.querySelector('.popup__close');
+let seveBotton = document.querySelector('#save')
+let firstNameContainer = document.querySelector('.profile__name');
+let lastNameContainer = document.querySelector('.profile__profession');
+let firstName = document.querySelector('#firstName');
+let lastName = document.querySelector('#lastName');
+let formLissener = document.querySelector('form');
+
+
+
 const seveBotton = document.querySelector('#save')
 const firstNameContainer = document.querySelector('.profile__name');
 const lastNameContainer = document.querySelector('.profile__profession');
@@ -68,6 +80,7 @@ const closepopupCard = document.querySelector('#closeCard');
 
 const bigImg = document.querySelector('#popupImage');
 
+
 function createTaskDomNode(item){
 	const newItem = templateElement.content.cloneNode(true);
 	const title = newItem.querySelector('#cardTitle');
@@ -75,6 +88,7 @@ function createTaskDomNode(item){
   const link = newItem.querySelector('#cardLink');
   link.src = item.link;
   link.alt = item.name;
+
 
   const deleteButton = newItem.querySelector('.element__btn_delete');
   deleteButton.addEventListener('click', deleteCardHandler);
@@ -92,11 +106,13 @@ function createTaskDomNode(item){
     bigImg.classList.toggle('popup_is-opened');
     const titleImg = document.querySelector('.popup__title');
     const popupImg = document.querySelector('.popup__image');
+
     titleImg.textContent = title.textContent;
     popupImg.src = link.src;
     popupImg.alt = title.textContent;
 
     closeImg.addEventListener('click', closePopup(popup));
+
   });
 	return newItem;
 }
@@ -160,3 +176,4 @@ closepopupCard.addEventListener('click', function () {
 bigImgclose.addEventListener('click', function () {
   closePopup(bigImg)
 });
+
