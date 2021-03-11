@@ -96,7 +96,6 @@ function createTaskDomNode(item){
     popupImg.src = link.src;
     popupImg.alt = title.textContent;
 
-    closeImg.addEventListener('click', closePopup(popup));
   });
 	return newItem;
 }
