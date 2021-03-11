@@ -5,7 +5,6 @@ const lastNameContainer = document.querySelector('.profile__profession');
 const firstName = document.querySelector('#firstName');
 const lastName = document.querySelector('#lastName');
 const formLissener = document.querySelector('form');
-// точно нужны
 const bigImgclose = document.querySelector('.popup__close_image');
 const closeImg = document.querySelector('.popup__close_image');
 const closeFormBotton = document.querySelector('.popup__close');
@@ -66,19 +65,9 @@ const showpopupCard = document.querySelector('#popupCard');
 const seveCardBotton = document.querySelector('#formCards')
 const closepopupCard = document.querySelector('#closeCard');
 
-function deleteCardHandler(evt) {
-	const target = evt.target;
-	const currentTask = target.closest('#cardElement');
-	currentTask.remove();
-}
 
-
-function addTaskListeners(task) {
-	const deleteButton = task.querySelector('.element__btn_delete');
-	deleteButton.addEventListener('click', deleteCardHandler);
-
-}
 const bigImg = document.querySelector('#popupImage');
+
 function createTaskDomNode(item){
 	const newItem = templateElement.content.cloneNode(true);
 	const title = newItem.querySelector('#cardTitle');
@@ -87,6 +76,17 @@ function createTaskDomNode(item){
   link.src = item.link;
   link.alt = item.name;
 
+  const deleteButton = newItem.querySelector('.element__btn_delete');
+  deleteButton.addEventListener('click', deleteCardHandler);
+  function deleteCardHandler(evt) {
+    const target = evt.target;
+    const currentTask = target.closest('#cardElement');
+    currentTask.remove();
+  }
+
+      newItem.querySelector('.element__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__like_active');
+    });
 
   link.addEventListener('click', function () {
     bigImg.classList.toggle('popup_is-opened');
@@ -104,20 +104,10 @@ function createTaskDomNode(item){
 function renderList() {
 	const result = initialCards.map(function(item) {
 		const newTask = createTaskDomNode(item);
-		addTaskListeners(newTask);
-
-    newTask.querySelector('.element__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like_active');
-    });
 		return newTask;
-
-
 	});
-
 	boxCards.append(...result);
-
 }
-
 renderList();
 
 
@@ -133,10 +123,6 @@ function cardFormSubmitHandler(event) {
 	const inputLink = cardLinkInputValue.value;
 	const newTask = createTaskDomNode({ name: inputTitle, link: inputLink });
 
-	addTaskListeners(newTask);
-  newTask.querySelector('.element__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like_active');
-    });
 	boxCards.prepend(newTask);
 
 	cardTitleInputValue.value = '';
