@@ -1,0 +1,10 @@
+.popup__title_black-form {
+  color: black;
+  margin: 0 0 54px;
+}
+@media (max-width: 320px) {
+  .popup__title_black-form {
+    margin: 0 0 75px;
+  }
+}
+
