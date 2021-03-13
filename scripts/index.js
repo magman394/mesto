@@ -19,17 +19,8 @@ function addName(event) {
   event.preventDefault();
   firstNameContainer.textContent = firstName.value;
   lastNameContainer.textContent = lastName.value;
-    firstName.value = '';
-    lastName.value = '';
-    showForm.classList.toggle(closePopup(popup));
-    firstName.value = firstNameContainer.textContent
-    lastName.value = lastNameContainer.textContent
+    closePopup(popup);
 }
-
-
-
-formLissener.addEventListener('submit', addName);
-
 
 const initialCards = [
   {
@@ -88,8 +79,9 @@ function createTaskDomNode(item){
     evt.target.classList.toggle('element__like_active');
     });
 
-  link.addEventListener('click', function () {
-    bigImg.classList.toggle('popup_is-opened');
+    link.addEventListener('click', function () {
+      showPopup(bigImg);
+
     const titleImg = document.querySelector('.popup__title');
     const popupImg = document.querySelector('.popup__image');
     titleImg.textContent = title.textContent;
@@ -124,13 +116,11 @@ function cardFormSubmitHandler(event) {
 
 	boxCards.prepend(newTask);
 
-	cardTitleInputValue.value = '';
-  cardLinkInputValue.value = '';
   closePopup(showpopupCard);
 }
 
 seveCardBotton.addEventListener('submit', cardFormSubmitHandler);
-
+formLissener.addEventListener('submit', addName);
 
 
 function showPopup(popup) {
@@ -141,12 +131,17 @@ function closePopup(popup) {
   popup.classList.remove('popup_is-opened');
 }
 
+
 showFormBotton.addEventListener('click', function () {
   showPopup(showForm)
+  firstName.value = firstNameContainer.textContent
+  lastName.value = lastNameContainer.textContent
 });
 
 boxCardsForm.addEventListener('click', function () {
   showPopup(showpopupCard)
+  cardTitleInputValue.value = inputTitle.textContent
+  cardLinkInputValue.value = inputLink.textContent
 });
 
 closeFormBotton.addEventListener('click', function () {
