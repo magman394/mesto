@@ -82,7 +82,7 @@ function createTaskDomNode(item){
     link.addEventListener('click', function () {
       showPopup(bigImg);
 
-    const titleImg = document.querySelector('.popup__title');
+    const titleImg = bigImg.querySelector('.popup__title');
     const popupImg = document.querySelector('.popup__image');
     titleImg.textContent = title.textContent;
     popupImg.src = link.src;
@@ -103,14 +103,14 @@ renderList();
 
 
 
-
-
+const cardTitleInputValue = document.querySelector('#inputTitle');
+const cardLinkInputValue = document.querySelector('#inputLink');
 
 function cardFormSubmitHandler(event) {
 	event.preventDefault();
-	const cardTitleInputValue = document.querySelector('#inputTitle');
+
 	const inputTitle = cardTitleInputValue.value;
-  const cardLinkInputValue = document.querySelector('#inputLink');
+
 	const inputLink = cardLinkInputValue.value;
 	const newTask = createTaskDomNode({ name: inputTitle, link: inputLink });
 
@@ -123,8 +123,41 @@ seveCardBotton.addEventListener('submit', cardFormSubmitHandler);
 formLissener.addEventListener('submit', addName);
 
 
+
+bigImg.addEventListener('click', function (evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(bigImg)
+  }
+});
+
+
+showpopupCard.addEventListener('click', function (evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(showpopupCard)
+  }
+});
+
+showForm.addEventListener('click', function (evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(showForm)
+  }
+});
+
+
+
 function showPopup(popup) {
   popup.classList.add('popup_is-opened');
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+      closePopup(popup)
+    }
+      });
+    document.removeEventListener('keydown', function (evt) {
+      if (evt.key === 'Escape') {
+        closePopup(popup)
+      }
+        });
+
 }
 
 function closePopup(popup) {
@@ -142,6 +175,7 @@ boxCardsForm.addEventListener('click', function () {
   showPopup(showpopupCard)
   cardTitleInputValue.value = inputTitle.textContent
   cardLinkInputValue.value = inputLink.textContent
+
 });
 
 closeFormBotton.addEventListener('click', function () {
