@@ -131,13 +131,13 @@ bigImg.addEventListener('click', function (evt) {
 });
 
 
-showpopupCard.addEventListener('click', function (evt) {
+showpopupCard.addEventListener('mousedown', function (evt) {
   if (evt.target.classList.contains('popup')) {
     closePopup(showpopupCard)
   }
 });
 
-showForm.addEventListener('click', function (evt) {
+showForm.addEventListener('mousedown', function (evt) {
   if (evt.target.classList.contains('popup')) {
     closePopup(showForm)
   }
