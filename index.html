@@ -33,9 +33,9 @@
       <button type="button" class="popup__close opacity-link"><img src="./images/Close-Icon.svg" alt="кнопка закрытия"></button>
       <form class="popup__form" name="popup-profile" id="formAutor" novalidate>
         <h2 class="popup__title popup__title_color_black">Редактировать профиль</h2>
-        <input name="firstName" id="firstName" type="text" class="popup__input" minlength="2" maxlength="30" required placeholder="Имя">
+        <input name="firstName" id="firstName" type="text" class="popup__input" minlength="2" maxlength="40" required placeholder="Имя">
         <span id="firstName-error" class="popup__error"></span>
-        <input name="lastName" id="lastName" type="text" class="popup__input" minlength="2" maxlength="30" required placeholder="Профессия">
+        <input name="lastName" id="lastName" type="text" class="popup__input" minlength="2" maxlength="200" required placeholder="Профессия">
         <span id="lastName-error" class="popup__error"></span>
         <button id="save" type="submit" class="popup__submit">Сохранить</button>
       </form>
@@ -49,7 +49,7 @@
         <h2 class="popup__title popup__title_color_black">Новое место</h2>
         <input name="inputTitle" type="text" class="popup__input" minlength="2" maxlength="30" required placeholder="Название" id="inputTitle">
         <span id="inputTitle-error" class="popup__error"></span>
-        <input name="inputLink" id="inputLink" type="url" class="popup__input" minlength="2" required placeholder="Ссылка на картинку">
+        <input name="inputLink" id="inputLink" type="url" class="popup__input" required placeholder="Ссылка на картинку">
         <span id="inputLink-error" class="popup__error"></span>
         <button id="saveCard" type="submit" class="popup__submit">Сохранить</button>
       </form>
