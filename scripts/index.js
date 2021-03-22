@@ -8,18 +8,18 @@ const formLissener = document.querySelector('form');
 const bigImgclose = document.querySelector('.popup__close_image');
 const closeImg = document.querySelector('.popup__close_image');
 const closeFormBotton = document.querySelector('.popup__close');
-const popup = document.querySelector('.popup');
+
 const showFormBotton = document.querySelector('.profile__edit-botton');
 const showForm = document.querySelector('#popupAutor');
 
 
 
 
-function addName(event) {
-  event.preventDefault();
+function addName(evt) {
+  evt.preventDefault();
   firstNameContainer.textContent = firstName.value;
   lastNameContainer.textContent = lastName.value;
-    closePopup(popup);
+    closePopup(showForm);
 }
 
 const initialCards = [
@@ -145,23 +145,27 @@ showForm.addEventListener('mousedown', function (evt) {
 
 
 
+
+
+const handleEscPress = (evt) => {
+  const popup = document.querySelector('.popup_is-opened');
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+  }
+};
+
+
+
+
+
 function showPopup(popup) {
   popup.classList.add('popup_is-opened');
-  document.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Escape') {
-      closePopup(popup)
-    }
-      });
-    document.removeEventListener('keydown', function (evt) {
-      if (evt.key === 'Escape') {
-        closePopup(popup)
-      }
-        });
-
+  document.addEventListener('keydown', handleEscPress);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', handleEscPress);
 }
 
 
