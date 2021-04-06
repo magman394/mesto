@@ -50,13 +50,15 @@ export default class Card {
       }
     });
 
-  }
+    }
+
 
   generateCard() {
   this._element = this._getTemplate();
   this._setEventListeners();
   this._like();
   this._delete();
+
   this._element.querySelector('#cardTitle').textContent = this._title;
   this._element.querySelector('#cardLink').alt = this._title;
   this._element.querySelector('#cardLink').src = this._link;

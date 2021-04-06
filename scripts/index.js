@@ -1,4 +1,4 @@
-
+const bigImg = document.querySelector('#popupImage');
 
 import Card from './Card.js';
 import { initialCards } from './constants.js';
@@ -9,6 +9,28 @@ initialCards.forEach((item) => {
   // Добавляем в DOM
   document.querySelector('.elements').append(cardElement);
 });
+
+const cardTitleInputValue = document.querySelector('#inputTitle');
+const cardLinkInputValue = document.querySelector('#inputLink');
+const seveCardBotton = document.querySelector('#formCards')
+const boxCards = document.querySelector('.elements');
+
+function cardFormSubmitHandler(event) { // функция обработки формы для создания карточки
+	event.preventDefault(); // сборсил перезагрузку страницы
+
+	const inputTitle = cardTitleInputValue.value; // запомнил значение введенное в титул
+	const inputLink = cardLinkInputValue.value; // запомнил значение введенное в ссылку
+
+	const newTask = new Card({ name: inputTitle, link: inputLink }); //создал экземпляр класса с значениями из титула и ссылки
+
+	boxCards.prepend(newTask.generateCard()); // создал экземлпяру разметку и поставил первым
+
+  closePopup(showpopupCard); // закрыл форму
+};
+
+seveCardBotton.addEventListener('submit', cardFormSubmitHandler); //по кнопки сохранить вызвал функцию обработки формы
+
+
 
 // сохранение формы Жак-ив
 
@@ -24,11 +46,13 @@ formLissener.addEventListener('submit', addName);
 
 // сохранение формы Жак-ив
 
+
+
 // const seveBotton = document.querySelector('#save')
 
 
 
-// const bigImgclose = document.querySelector('.popup__close_image');
+const bigImgclose = document.querySelector('.popup__close_image');
 // const closeImg = document.querySelector('.popup__close_image');
 
 
@@ -38,12 +62,12 @@ formLissener.addEventListener('submit', addName);
 
 
 
-// const boxCards = document.querySelector('.elements');
+
 
 // const templateElement = document.querySelector('#boxCards');
 
-// const seveCardBotton = document.querySelector('#formCards')
-// const closepopupCard = document.querySelector('#closeCard');
+
+const closepopupCard = document.querySelector('#closeCard');
 
 
 
@@ -89,27 +113,22 @@ formLissener.addEventListener('submit', addName);
 
 
 
+// initialCards.forEach((item) => {
+//   const card = new Card(item.name, item.link);
+//   const cardElement = card.generateCard();
 
-// function cardFormSubmitHandler(event) {
-// 	event.preventDefault();
+//   // Добавляем в DOM
+//   document.querySelector('.elements').append(cardElement);
+// });
 
-// 	const inputTitle = cardTitleInputValue.value;
-
-// 	const inputLink = cardLinkInputValue.value;
-// 	const newTask = createTaskDomNode({ name: inputTitle, link: inputLink });
-
-// 	boxCards.prepend(newTask);
-
-//   closePopup(showpopupCard);
+// function renderList() {
+// 	const result = initialCards.map(function(item) {
+// 		const newTask = new Card(item.name, item.link);
+// 		return newTask;
+// 	});
+// 	boxCards.append(...result);
 // }
-
-// seveCardBotton.addEventListener('submit', cardFormSubmitHandler);
-
-
-
-
-
-
+// renderList();
 
 
 
@@ -135,8 +154,7 @@ const lastName = document.querySelector('#lastName');
 const firstNameContainer = document.querySelector('.profile__name');
 const lastNameContainer = document.querySelector('.profile__profession');
 const showpopupCard = document.querySelector('#popupCard');
-const cardTitleInputValue = document.querySelector('#inputTitle');
-const cardLinkInputValue = document.querySelector('#inputLink');
+
 
 function showPopup(popup) {
   popup.classList.add('popup_is-opened');
@@ -166,9 +184,19 @@ closeFormBotton.addEventListener('click', function () {
   closePopup(showForm)
 });
 
-
+closepopupCard.addEventListener('click', function () {
+  closePopup(showpopupCard)
+});
 showForm.addEventListener('mousedown', function (evt) {
   if (evt.target.classList.contains('popup')) {
     closePopup(showForm)
+  }
+});
+bigImgclose.addEventListener('click', function () {
+  closePopup(bigImg)
+});
+showpopupCard.addEventListener('mousedown', function (evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(showpopupCard)
   }
 });
