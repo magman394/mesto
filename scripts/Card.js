@@ -2,9 +2,10 @@
 import { bigImgclose, bigImg, popupImg, popupTitle } from './constants.js'
 
 export default class Card {
-  constructor(name, link) {
+  constructor(name, link, cardSelector) {
       this._title = name;
       this._link = link;
+      this._cardSelector = cardSelector;
   }
 
   _handleOpenPopup() {
@@ -18,12 +19,16 @@ export default class Card {
  }
 
   _getTemplate() {
-  // забираем размеку из HTML и клонируем элемент
-    const cardElement = document.querySelector('#boxCards').content.cloneNode(true);
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('#cardElement')
+      .cloneNode(true);
 
-  // вернём DOM-элемент карточки
     return cardElement;
   }
+
+
   _like() {
     this._element.querySelector('.element__like').addEventListener('click', (evt) => {
           evt.target.classList.toggle('element__like_active');
@@ -31,7 +36,6 @@ export default class Card {
   }
   _delete() {
     this._element.querySelector('.element__btn').addEventListener('click', () => {
-
       document.querySelector('#cardElement').remove();
       });
 }

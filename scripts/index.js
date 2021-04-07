@@ -1,40 +1,33 @@
-const bigImg = document.querySelector('#popupImage');
 
 import Card from './Card.js';
-import { initialCards } from './constants.js';
-initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link);
-  const cardElement = card.generateCard();
+import FormValidator from './FormValidator.js';
 
-  // Добавляем в DOM
-  document.querySelector('.elements').append(cardElement);
+const editFormValidator = new FormValidator(item, formAutor);
+const cardFormValidator = new FormValidator(item, formCards);
+editFormValidator.enableValidation();
+cardFormValidator.enableValidation();
+
+
+import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
+  seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
+   boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
+    lastNameContainer, showpopupCard, formAutor, formCards } from './constants.js';
+initialCards.forEach((item) => {
+  const card = new Card(item.name, item.link, '#boxCards');
+  const cardElement = card.generateCard();
+  boxCards.append(cardElement);
 });
 
-const cardTitleInputValue = document.querySelector('#inputTitle');
-const cardLinkInputValue = document.querySelector('#inputLink');
-const seveCardBotton = document.querySelector('#formCards')
-const boxCards = document.querySelector('.elements');
+function cardFormSubmitHandler(event) {
+	event.preventDefault();
 
-function cardFormSubmitHandler(event) { // функция обработки формы для создания карточки
-	event.preventDefault(); // сборсил перезагрузку страницы
+	const inputTitle = cardTitleInputValue.value;
+	const inputLink = cardLinkInputValue.value;
+	const newTask = new Card(inputTitle, inputLink, '#boxCards');
+	boxCards.prepend(newTask.generateCard());
 
-	const inputTitle = cardTitleInputValue.value; // запомнил значение введенное в титул
-	const inputLink = cardLinkInputValue.value; // запомнил значение введенное в ссылку
-
-	const newTask = new Card({ name: inputTitle, link: inputLink }); //создал экземпляр класса с значениями из титула и ссылки
-
-	boxCards.prepend(newTask.generateCard()); // создал экземлпяру разметку и поставил первым
-
-  closePopup(showpopupCard); // закрыл форму
+  closePopup(showpopupCard);
 };
-
-seveCardBotton.addEventListener('submit', cardFormSubmitHandler); //по кнопки сохранить вызвал функцию обработки формы
-
-
-
-// сохранение формы Жак-ив
-
-const formLissener = document.querySelector('form');
 
 function addName(evt) {
   evt.preventDefault();
@@ -42,98 +35,6 @@ function addName(evt) {
   lastNameContainer.textContent = lastName.value;
     closePopup(showForm);
 }
-formLissener.addEventListener('submit', addName);
-
-// сохранение формы Жак-ив
-
-
-
-// const seveBotton = document.querySelector('#save')
-
-
-
-const bigImgclose = document.querySelector('.popup__close_image');
-// const closeImg = document.querySelector('.popup__close_image');
-
-
-
-
-
-
-
-
-
-
-// const templateElement = document.querySelector('#boxCards');
-
-
-const closepopupCard = document.querySelector('#closeCard');
-
-
-
-// function createTaskDomNode(item){
-// 	const newItem = templateElement.content.cloneNode(true);
-// 	const title = newItem.querySelector('#cardTitle');
-// 	title.textContent = item.name;
-//   const link = newItem.querySelector('#cardLink');
-//   link.src = item.link;
-//   link.alt = item.name;
-
-//   const deleteButton = newItem.querySelector('.element__btn_delete');
-//   deleteButton.addEventListener('click', deleteCardHandler);
-//   function deleteCardHandler(evt) {
-//     const target = evt.target;
-//     const currentTask = target.closest('#cardElement');
-//     currentTask.remove();
-//   }
-
-
-//     link.addEventListener('click', function () {
-//       showPopup(bigImg);
-
-//     const titleImg = bigImg.querySelector('.popup__title');
-//     const popupImg = document.querySelector('.popup__image');
-//     titleImg.textContent = title.textContent;
-//     popupImg.src = link.src;
-//     popupImg.alt = title.textContent;
-
-//   });
-// 	return newItem;
-// }
-
-// function renderList() {
-// 	const result = initialCards.map(function(item) {
-// 		const newTask = createTaskDomNode(item);
-// 		return newTask;
-// 	});
-// 	boxCards.append(...result);
-// }
-// renderList();
-
-
-
-
-// initialCards.forEach((item) => {
-//   const card = new Card(item.name, item.link);
-//   const cardElement = card.generateCard();
-
-//   // Добавляем в DOM
-//   document.querySelector('.elements').append(cardElement);
-// });
-
-// function renderList() {
-// 	const result = initialCards.map(function(item) {
-// 		const newTask = new Card(item.name, item.link);
-// 		return newTask;
-// 	});
-// 	boxCards.append(...result);
-// }
-// renderList();
-
-
-
-
-
 
 
 const handleEscPress = (evt) => {
@@ -142,18 +43,6 @@ const handleEscPress = (evt) => {
     closePopup(popup);
   }
 };
-
-
-
-const showFormBotton = document.querySelector('.profile__edit-botton');
-const boxCardsForm = document.querySelector('.profile__add-botton');
-const closeFormBotton = document.querySelector('.popup__close');
-const showForm = document.querySelector('#popupAutor');
-const firstName = document.querySelector('#firstName');
-const lastName = document.querySelector('#lastName');
-const firstNameContainer = document.querySelector('.profile__name');
-const lastNameContainer = document.querySelector('.profile__profession');
-const showpopupCard = document.querySelector('#popupCard');
 
 
 function showPopup(popup) {
@@ -200,3 +89,5 @@ showpopupCard.addEventListener('mousedown', function (evt) {
     closePopup(showpopupCard)
   }
 });
+formLissener.addEventListener('submit', addName);
+seveCardBotton.addEventListener('submit', cardFormSubmitHandler);

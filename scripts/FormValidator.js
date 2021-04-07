@@ -69,7 +69,7 @@
 
 
 // enableValidation ({
-//   formSelector: '[name="popup-profile"]',
+//    formSelector: '[name="popup-profile"]',
 //    inputSelector: '.popup__input',
 //    submitButtonSelector: '.popup__submit',
 //    inactiveButtonClass: 'popup__submit_invalid',
@@ -77,3 +77,14 @@
 //    errorClass: 'popup__error_visible'
 //  })
 
+export default class FormValidator {
+  constructor(item, validElement) {
+    this._formSelector = item.formSelector;
+    this._inputSelector = item.inputSelector;
+    this._submitButtonSelector = item.submitButtonSelector;
+    this._inactiveButtonClass = item.inactiveButtonClass;
+    this._inputErrorClass = item.inputErrorClass;
+    this._errorClass = item.errorClass;
+    this._validElement = validElement;
+}
+}
