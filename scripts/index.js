@@ -2,10 +2,18 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
-const editFormValidator = new FormValidator(item, formAutor);
-const cardFormValidator = new FormValidator(item, formCards);
-editFormValidator.enableValidation();
-cardFormValidator.enableValidation();
+const configG = [
+   {formSelector: '[name="popup-profile"]',
+   inputSelector: '.popup__input',
+   submitButtonSelector: '.popup__submit',
+   inactiveButtonClass: 'popup__submit_invalid',
+   inputErrorClass: 'popup__input_type_error',
+   errorClass: 'popup__error_visible'}
+];
+const formAutorValidator = new FormValidator(configG, formAutor);
+formAutorValidator.enableValidation();
+const formCardsValidator = new FormValidator(configG, formCards);
+formCardsValidator.enableValidation();
 
 
 import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
@@ -91,3 +99,4 @@ showpopupCard.addEventListener('mousedown', function (evt) {
 });
 formLissener.addEventListener('submit', addName);
 seveCardBotton.addEventListener('submit', cardFormSubmitHandler);
+
