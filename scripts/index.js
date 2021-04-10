@@ -33,7 +33,7 @@ function createCard(item) {
 };
 function renderCard(item) {
   const card = createCard(item);
-  boxCards.prepend(card);
+  boxCards.append(card);
 }
   initialCards.forEach((item) => {
     renderCard(item)
@@ -42,7 +42,7 @@ function cardFormSubmitHandler(event) {
   event.preventDefault();
   const inputTitle = cardTitleInputValue.value;
   const inputLink = cardLinkInputValue.value;
-  renderCard(inputTitle, inputLink, '#boxCards');
+  renderCard({name: inputTitle, link: inputLink});
 
   closePopup(showpopupCard);
 };
