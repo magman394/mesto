@@ -1,6 +1,15 @@
 
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
+  seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
+   boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
+    lastNameContainer, showpopupCard, formAutor, formCards } from './constants.js';
+initialCards.forEach((item) => {
+  const card = new Card(item.name, item.link, '#boxCards');
+  const cardElement = card.generateCard();
+  boxCards.append(cardElement);
+});
 
 const configG = [
    {formSelector: '[name="popup-profile"]',
@@ -16,15 +25,7 @@ const formCardsValidator = new FormValidator(configG, formCards);
 formCardsValidator.enableValidation();
 
 
-import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
-  seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
-   boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
-    lastNameContainer, showpopupCard, formAutor, formCards } from './constants.js';
-initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, '#boxCards');
-  const cardElement = card.generateCard();
-  boxCards.append(cardElement);
-});
+
 
 function cardFormSubmitHandler(event) {
 	event.preventDefault();
