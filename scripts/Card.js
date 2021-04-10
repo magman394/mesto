@@ -1,6 +1,6 @@
 // import { _showPopup, _closePopup } from './utils.js';
 import { bigImgclose, bigImg, popupImg, popupTitle } from './constants.js'
-
+import {showPopup, closePopup} from './index.js'
 export default class Card {
   constructor(name, link, cardSelector) {
       this._title = name;
@@ -9,13 +9,13 @@ export default class Card {
   }
 
   _handleOpenPopup() {
-  popupImg.src = this._link;
-  popupImg.alt = this._title;
-  popupTitle.textContent = this._title;
-  bigImg.classList.add('popup_is-opened');
+    popupImg.src = this._link;
+    popupImg.alt = this._title;
+    popupTitle.textContent = this._title;
+    showPopup(bigImg);
   }
   _handleClosePopup() {
-   bigImg.classList.remove('popup_is-opened');
+    closePopup(bigImg);
  }
 
   _getTemplate() {
@@ -45,14 +45,6 @@ export default class Card {
      this._handleOpenPopup();
     });
 
-    bigImgclose.addEventListener('click', () => {
-      this._handleClosePopup();
-    });
-    bigImg.addEventListener('mousedown', (evt) => {
-      if (evt.target.classList.contains('popup')) {
-        this._handleClosePopup();
-      }
-    });
 
     }
 

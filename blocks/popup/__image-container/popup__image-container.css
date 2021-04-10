@@ -13,20 +13,17 @@
 }
 @media (max-width: 1024px) {
   .popup__image-container {
-    min-width: 800px;
     padding: 34px 36px 0 36px;
   }
 }
 @media (max-width: 768px) {
   .popup__image-container {
-    min-width: 500px;
     padding: 34px 36px 0 36px;
   }
 }
 
 @media (max-width: 500px) {
   .popup__image-container {
-    min-width: 282px;
     padding: 0;
   }
 }
