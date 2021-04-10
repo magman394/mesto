@@ -6,20 +6,6 @@ import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue
    boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
     lastNameContainer, showpopupCard, formAutor, formCards, configG } from './constants.js';
 
-// initialCards.forEach((item) => {
-//   const card = new Card(item.name, item.link, '#boxCards');
-//   const cardElement = card.generateCard();
-//   boxCards.append(cardElement);
-// });
-// function cardFormSubmitHandler(event) {
-// 	event.preventDefault();
-// 	const inputTitle = cardTitleInputValue.value;
-// 	const inputLink = cardLinkInputValue.value;
-// 	const newTask = new Card(inputTitle, inputLink, '#boxCards');
-// 	boxCards.prepend(newTask.generateCard());
-
-//   closePopup(showpopupCard);
-// };
 
 const formAutorValidator = new FormValidator(configG, formAutor);
 formAutorValidator.enableValidation();
