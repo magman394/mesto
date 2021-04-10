@@ -5,11 +5,6 @@ import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue
   seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
    boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
     lastNameContainer, showpopupCard, formAutor, formCards, configG } from './constants.js';
-initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, '#boxCards');
-  const cardElement = card.generateCard();
-  boxCards.append(cardElement);
-});
 
 
 const formAutorValidator = new FormValidator(configG, formAutor);
@@ -18,15 +13,22 @@ const formCardsValidator = new FormValidator(configG, formCards);
 formCardsValidator.enableValidation();
 
 
-
-
+function createCard(item) {
+  const card = new Card(item.name, item.link, '#boxCards');
+  return card.generateCard();
+};
+function renderCard(item) {
+  const card = createCard(item);
+  boxCards.append(card);
+}
+  initialCards.forEach((item) => {
+    renderCard(item)
+  })
 function cardFormSubmitHandler(event) {
-	event.preventDefault();
-
-	const inputTitle = cardTitleInputValue.value;
-	const inputLink = cardLinkInputValue.value;
-	const newTask = new Card(inputTitle, inputLink, '#boxCards');
-	boxCards.prepend(newTask.generateCard());
+  event.preventDefault();
+  const inputTitle = cardTitleInputValue.value;
+  const inputLink = cardLinkInputValue.value;
+  renderCard({name: inputTitle, link: inputLink});
 
   closePopup(showpopupCard);
 };
@@ -47,17 +49,21 @@ const handleEscPress = (evt) => {
 };
 
 
-function showPopup(popup) {
+export function showPopup(popup) {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', handleEscPress);
 }
 
-function closePopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove('popup_is-opened');
   document.removeEventListener('keydown', handleEscPress);
 }
 
-
+const closeAll = (evt) => {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target)
+  }
+}
 showFormBotton.addEventListener('click', function () {
   showPopup(showForm)
   firstName.value = firstNameContainer.textContent
@@ -68,6 +74,7 @@ boxCardsForm.addEventListener('click', function () {
   showPopup(showpopupCard)
   cardTitleInputValue.value = inputTitle.textContent
   cardLinkInputValue.value = inputLink.textContent
+  formCardsValidator.disableSubmitButton();
 
 });
 
@@ -78,19 +85,15 @@ closeFormBotton.addEventListener('click', function () {
 closepopupCard.addEventListener('click', function () {
   closePopup(showpopupCard)
 });
-showForm.addEventListener('mousedown', function (evt) {
-  if (evt.target.classList.contains('popup')) {
-    closePopup(showForm)
-  }
-});
+showForm.addEventListener('mousedown', closeAll);
 bigImgclose.addEventListener('click', function () {
   closePopup(bigImg)
 });
-showpopupCard.addEventListener('mousedown', function (evt) {
-  if (evt.target.classList.contains('popup')) {
-    closePopup(showpopupCard)
-  }
-});
+bigImg.addEventListener('mousedown', closeAll);
+
+
+showpopupCard.addEventListener('mousedown', closeAll);
 formLissener.addEventListener('submit', addName);
 seveCardBotton.addEventListener('submit', cardFormSubmitHandler);
+
 
