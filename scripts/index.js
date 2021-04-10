@@ -4,21 +4,14 @@ import FormValidator from './FormValidator.js';
 import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
   seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
    boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
-    lastNameContainer, showpopupCard, formAutor, formCards } from './constants.js';
+    lastNameContainer, showpopupCard, formAutor, formCards, configG } from './constants.js';
 initialCards.forEach((item) => {
   const card = new Card(item.name, item.link, '#boxCards');
   const cardElement = card.generateCard();
   boxCards.append(cardElement);
 });
 
-const configG = [
-   {formSelector: '[name="popup-profile"]',
-   inputSelector: '.popup__input',
-   submitButtonSelector: '.popup__submit',
-   inactiveButtonClass: 'popup__submit_invalid',
-   inputErrorClass: 'popup__input_type_error',
-   errorClass: 'popup__error_visible'}
-];
+
 const formAutorValidator = new FormValidator(configG, formAutor);
 formAutorValidator.enableValidation();
 const formCardsValidator = new FormValidator(configG, formCards);
