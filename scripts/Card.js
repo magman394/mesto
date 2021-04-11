@@ -1,6 +1,5 @@
-// import { _showPopup, _closePopup } from './utils.js';
-import { bigImgclose, bigImg, popupImg, popupTitle } from './constants.js'
-import {showPopup, closePopup} from './index.js'
+import { bigImg, popupImg, popupTitle } from './constants.js'
+import { showPopup, closePopup } from './index.js'
 export default class Card {
   constructor(name, link, cardSelector) {
       this._title = name;

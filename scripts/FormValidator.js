@@ -43,8 +43,6 @@ _toggleButtonState() {
   if (this._hasInvalidInput() || this._allInputEmpty()) {
     this.disableSubmitButton();
     this._buttonElement.classList.add(this._inactiveButtonClass);
-    this._buttonElement.setAttribute('disabled', true);
-
     } else {
       this._buttonElement.classList.remove(this._inactiveButtonClass);
       this._buttonElement.removeAttribute('disabled');
@@ -55,7 +53,6 @@ _toggleButtonState() {
 
 _setInputListeners() {
    this._inputList = Array.from(this._validElement.querySelectorAll(this._inputSelector));
-
    this._buttonElement = this._validElement.querySelector(this._submitButtonSelector);
    this._inputList.forEach(inputElement => {
     inputElement.addEventListener('input', () => {
