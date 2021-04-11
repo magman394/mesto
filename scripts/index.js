@@ -17,12 +17,16 @@ function createCard(item) {
   const card = new Card(item.name, item.link, '#boxCards');
   return card.generateCard();
 };
-function renderCard(item) {
+function renderCard(item, toEnd) {
   const card = createCard(item);
+  if (toEnd === true){
   boxCards.append(card);
+} else {
+    boxCards.prepend(card);
+  }
 }
   initialCards.forEach((item) => {
-    renderCard(item)
+    renderCard(item, true)
   })
 function cardFormSubmitHandler(event) {
   event.preventDefault();
