@@ -1,10 +1,12 @@
 
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
   seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
    boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
     lastNameContainer, showpopupCard, formAutor, formCards, configG } from './constants.js';
+
 
 
 const formAutorValidator = new FormValidator(configG, formAutor);
@@ -12,30 +14,40 @@ formAutorValidator.enableValidation();
 const formCardsValidator = new FormValidator(configG, formCards);
 formCardsValidator.enableValidation();
 
-
-function createCard(item) {
-  const card = new Card(item.name, item.link, '#boxCards');
-  return card.generateCard();
-};
-function renderCard(item, toEnd) {
-  const card = createCard(item);
-  if (toEnd === true){
-  boxCards.append(card);
-} else {
-    boxCards.prepend(card);
+const defaultCardList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '#boxCards');
+    const cardElement = card.generateCard();
+    defaultCardList.setItem(cardElement);
   }
-}
-  initialCards.forEach((item) => {
-    renderCard(item, true)
-  })
-function cardFormSubmitHandler(event) {
-  event.preventDefault();
-  const inputTitle = cardTitleInputValue.value;
-  const inputLink = cardLinkInputValue.value;
-  renderCard({name: inputTitle, link: inputLink});
+}, boxCards);
 
-  closePopup(showpopupCard);
-};
+defaultCardList.renderItems();
+
+// function createCard(item) {
+//   const card = new Card(item.name, item.link, '#boxCards');
+//   return card.generateCard();
+// };
+// function renderCard(item, toEnd) {
+//   const card = createCard(item);
+//   if (toEnd === true){
+//   boxCards.append(card);
+// } else {
+//     boxCards.prepend(card);
+//   }
+// }
+//   initialCards.forEach((item) => {
+//     renderCard(item, true)
+//   })
+// function cardFormSubmitHandler(event) {
+//   event.preventDefault();
+//   const inputTitle = cardTitleInputValue.value;
+//   const inputLink = cardLinkInputValue.value;
+//   renderCard({name: inputTitle, link: inputLink});
+
+//   closePopup(showpopupCard);
+// };
 
 function addName(evt) {
   evt.preventDefault();
@@ -98,6 +110,6 @@ bigImg.addEventListener('mousedown', closeAll);
 
 showpopupCard.addEventListener('mousedown', closeAll);
 formLissener.addEventListener('submit', addName);
-seveCardBotton.addEventListener('submit', cardFormSubmitHandler);
+// seveCardBotton.addEventListener('submit', cardFormSubmitHandler);
 
 
