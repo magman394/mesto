@@ -2,6 +2,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
+import Popup from './Popup.js';
 import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
   seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
    boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
@@ -15,15 +16,21 @@ const formCardsValidator = new FormValidator(configG, formCards);
 formCardsValidator.enableValidation();
 
 const defaultCardList = new Section({
-  data: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, '#boxCards');
+  data: initialCards, // принял массив с карточками
+  renderer: (item) => { // отрисовал одну карточку и вставил в темпл
+    const card = new Card({name: item.name, link: item.link}, '#boxCards');
     const cardElement = card.generateCard();
     defaultCardList.setItem(cardElement);
-  }
-}, boxCards);
 
+  }
+}, '.elements');
 defaultCardList.renderItems();
+
+const imagePopup = new Popup('#popupImage');
+imagePopup.setEventListeners();
+imagePopup.open();
+// imagePopup.close();
+
 
 // function createCard(item) {
 //   const card = new Card(item.name, item.link, '#boxCards');
@@ -49,67 +56,67 @@ defaultCardList.renderItems();
 //   closePopup(showpopupCard);
 // };
 
-function addName(evt) {
-  evt.preventDefault();
-  firstNameContainer.textContent = firstName.value;
-  lastNameContainer.textContent = lastName.value;
-    closePopup(showForm);
-}
+// function addName(evt) {
+//   evt.preventDefault();
+//   firstNameContainer.textContent = firstName.value;
+//   lastNameContainer.textContent = lastName.value;
+//     closePopup(showForm);
+// }
 
 
-const handleEscPress = (evt) => {
-  const popup = document.querySelector('.popup_is-opened');
-  if (evt.key === 'Escape') {
-    closePopup(popup);
-  }
-};
+// const handleEscPress = (evt) => {
+//   const popup = document.querySelector('.popup_is-opened');
+//   if (evt.key === 'Escape') {
+//     closePopup(popup);
+//   }
+// };
 
 
-export function showPopup(popup) {
-  popup.classList.add('popup_is-opened');
-  document.addEventListener('keydown', handleEscPress);
-}
+// export function showPopup(popup) {
+//   popup.classList.add('popup_is-opened');
+//   document.addEventListener('keydown', handleEscPress);
+// }
 
-export function closePopup(popup) {
-  popup.classList.remove('popup_is-opened');
-  document.removeEventListener('keydown', handleEscPress);
-}
+// export function closePopup(popup) {
+//   popup.classList.remove('popup_is-opened');
+//   document.removeEventListener('keydown', handleEscPress);
+// }
 
-const closeAll = (evt) => {
-  if (evt.target.classList.contains('popup')) {
-    closePopup(evt.target)
-  }
-}
-showFormBotton.addEventListener('click', function () {
-  showPopup(showForm)
-  firstName.value = firstNameContainer.textContent
-  lastName.value = lastNameContainer.textContent
-});
+// const closeAll = (evt) => {
+//   if (evt.target.classList.contains('popup')) {
+//     closePopup(evt.target)
+//   }
+// }
+// showFormBotton.addEventListener('click', function () {
+//   showPopup(showForm)
+//   firstName.value = firstNameContainer.textContent
+//   lastName.value = lastNameContainer.textContent
+// });
 
-boxCardsForm.addEventListener('click', function () {
-  showPopup(showpopupCard)
-  cardTitleInputValue.value = inputTitle.textContent
-  cardLinkInputValue.value = inputLink.textContent
-  formCardsValidator.disableSubmitButton();
+// boxCardsForm.addEventListener('click', function () {
+//   showPopup(showpopupCard)
+//   cardTitleInputValue.value = inputTitle.textContent
+//   cardLinkInputValue.value = inputLink.textContent
+//   formCardsValidator.disableSubmitButton();
 
-});
+// });
 
-closeFormBotton.addEventListener('click', function () {
-  closePopup(showForm)
-});
+// closeFormBotton.addEventListener('click', function () {
+//   closePopup(showForm)
+// });
 
-closepopupCard.addEventListener('click', function () {
-  closePopup(showpopupCard)
-});
-showForm.addEventListener('mousedown', closeAll);
-bigImgclose.addEventListener('click', function () {
-  closePopup(bigImg)
-});
-bigImg.addEventListener('mousedown', closeAll);
+// closepopupCard.addEventListener('click', function () {
+//   closePopup(showpopupCard)
+// });
+// showForm.addEventListener('mousedown', closeAll);
+// bigImgclose.addEventListener('click', function () {
+//   closePopup(bigImg)
+// });
+// bigImg.addEventListener('mousedown', closeAll);
 
 
-showpopupCard.addEventListener('mousedown', closeAll);
-formLissener.addEventListener('submit', addName);
+// showpopupCard.addEventListener('mousedown', closeAll);
+// formLissener.addEventListener('submit', addName);
 // seveCardBotton.addEventListener('submit', cardFormSubmitHandler);
 
 

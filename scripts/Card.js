@@ -1,9 +1,9 @@
 import { bigImg, popupImg, popupTitle } from './constants.js'
-import { showPopup, closePopup } from './index.js'
+// import { showPopup, closePopup } from './index.js'
 export default class Card {
-  constructor(name, link, cardSelector) {
-      this._title = name;
-      this._link = link;
+  constructor(item, cardSelector) {
+      this._title = item.name;
+      this._link = item.link;
       this._cardSelector = cardSelector;
   }
 
@@ -23,36 +23,35 @@ export default class Card {
       .content
       .querySelector('#cardElement')
       .cloneNode(true);
-
     return cardElement;
   }
 
 
-  _like() {
-    this._element.querySelector('.element__like').addEventListener('click', (evt) => {
-          evt.target.classList.toggle('element__like_active');
-          });
-  }
-  _delete() {
-    this._element.querySelector('.element__btn').addEventListener('click', () => {
-      document.querySelector('#cardElement').remove();
-      });
-}
+//   _like() {
+//     this._element.querySelector('.element__like').addEventListener('click', (evt) => {
+//           evt.target.classList.toggle('element__like_active');
+//           });
+//   }
+//   _delete() {
+//     this._element.querySelector('.element__btn').addEventListener('click', () => {
+//       document.querySelector('#cardElement').remove();
+//       });
+// }
 
-  _setEventListeners() {
-    this._element.querySelector('#cardLink').addEventListener('click', () => {
-     this._handleOpenPopup();
-    });
+//   _setEventListeners() {
+//     this._element.querySelector('#cardLink').addEventListener('click', () => {
+//      this._handleOpenPopup();
+//     });
 
 
-    }
+    // }
 
 
   generateCard() {
   this._element = this._getTemplate();
-  this._setEventListeners();
-  this._like();
-  this._delete();
+  // this._setEventListeners();
+  // this._like();
+  // this._delete();
 
   this._element.querySelector('#cardTitle').textContent = this._title;
   this._element.querySelector('#cardLink').alt = this._title;
