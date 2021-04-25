@@ -19,6 +19,7 @@ export const lastNameContainer = document.querySelector('.profile__profession');
 export const showpopupCard = document.querySelector('#popupCard');
 export const formAutor = document.querySelector('#formAutor');
 export const formCards = document.querySelector('#formCards');
+export const popupAll = document.querySelector('.popup')
 
 
 export const initialCards = [

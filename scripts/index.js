@@ -1,8 +1,9 @@
 
 import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+// import FormValidator from './FormValidator.js';
 import Section from './Section.js';
-import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+
 import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
   seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
    boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
@@ -10,15 +11,17 @@ import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue
 
 
 
-const formAutorValidator = new FormValidator(configG, formAutor);
-formAutorValidator.enableValidation();
-const formCardsValidator = new FormValidator(configG, formCards);
-formCardsValidator.enableValidation();
+// const formAutorValidator = new FormValidator(configG, formAutor);
+// formAutorValidator.enableValidation();
+// const formCardsValidator = new FormValidator(configG, formCards);
+// formCardsValidator.enableValidation();
 
 const defaultCardList = new Section({
   data: initialCards, // принял массив с карточками
   renderer: (item) => { // отрисовал одну карточку и вставил в темпл
-    const card = new Card({name: item.name, link: item.link}, '#boxCards');
+    const card = new Card(item.name, item.link, '#boxCards', () => {
+      otckImg.open(item);
+    });
     const cardElement = card.generateCard();
     defaultCardList.setItem(cardElement);
 
@@ -26,10 +29,9 @@ const defaultCardList = new Section({
 }, '.elements');
 defaultCardList.renderItems();
 
-const imagePopup = new Popup('#popupImage');
-imagePopup.setEventListeners();
-imagePopup.open();
-// imagePopup.close();
+
+const otckImg = new PopupWithImage('#popupImage')
+// otckImg.setEventListeners();
 
 
 // function createCard(item) {

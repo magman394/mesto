@@ -1,24 +1,27 @@
+import { popupAll } from './constants.js';
 export default class Popup {
   constructor(popupSelector) {
     this._section = document.querySelector(popupSelector);
+
   }
   open() {
-
     this._section.classList.add('popup_is-opened');
+    this.setEventListeners();
   }
   close() {
-    this._section.remove('popup_is-opened');
+    this._section.classList.remove('popup_is-opened');
+    document.removeEventListener('keydown', this._handleEscClose.bind(this))
   }
   _handleEscClose = (evt) => {
-    const popup = document.querySelector('.popup_is-opened');
     if (evt.key === 'Escape') {
-      popup.close();
+      this.close();
     }
   }
   setEventListeners() {
+    document.addEventListener('keydown', this._handleEscClose.bind(this))
     this._section.querySelector('.popup__close').addEventListener('click', () => {
-          this.close();
-       });
-}
+      this.close();
+     });
+  }
 }
 
