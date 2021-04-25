@@ -7,8 +7,10 @@ export default class Section {
   }
 
   setItem(element) {
-
     this._section.append(element);
+  }
+  setItemNewCard(element) {
+    this._section.prepend(element);
   }
 
   renderItems() {

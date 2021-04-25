@@ -3,7 +3,8 @@ import Card from './Card.js';
 // import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
-
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
   seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
    boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
@@ -20,7 +21,8 @@ const defaultCardList = new Section({
   data: initialCards, // принял массив с карточками
   renderer: (item) => { // отрисовал одну карточку и вставил в темпл
     const card = new Card(item.name, item.link, '#boxCards', () => {
-      otckImg.open(item);
+      openImg.open(item);
+      openImg.setEventListeners();
     });
     const cardElement = card.generateCard();
     defaultCardList.setItem(cardElement);
@@ -28,9 +30,48 @@ const defaultCardList = new Section({
   }
 }, '.elements');
 defaultCardList.renderItems();
+const openFormCard = new PopupWithForm('#popupCard', (znacheniia) => {
+  const item = {name: znacheniia.name, link: znacheniia.link};
+  const newCard = new Card(item.name, item.link, '#boxCards', () => {
+    openFormCard.open(item);
+  });
+
+   defaultCardList.setItemNewCard(newCard.generateCard());
+
+   openFormCard.close();
+  });
+  openFormCard.setEventListeners();
+
+const openImg = new PopupWithImage('#popupImage')
+const userInfo = new UserInfo('.profile__name', '.profile__profession')
+
+  const openFormAutor = new PopupWithForm('#popupAutor', (znacheniia) => {
+    const item = {firstName: znacheniia.firstName, lastName: znacheniia.lastName}
+    userInfo.setUserInfo(item.firstName, item.lastName);
 
 
-const otckImg = new PopupWithImage('#popupImage')
+  });
+  openFormAutor.setEventListeners();
+ const cardFormSubmitHandler = (znacheniia) => {
+   userInfo.setUserInfo(znacheniia);
+   openFormAutor.close();
+ }
+
+ boxCardsForm.addEventListener('submit', cardFormSubmitHandler);
+
+  document.querySelector('.profile__add-botton').addEventListener('click', () => {
+    openFormCard.open();
+   });
+   document.querySelector('.profile__edit-botton').addEventListener('click', () => {
+    openFormAutor.open();
+   });
+
+// function delaemCard({name, link}, popupSelector) { //создаем карточку
+// const card = new Card({name, link}, popupSelector)
+//   return card.generateCard();
+// };
+
+
 // otckImg.setEventListeners();
 
 
