@@ -1,6 +1,6 @@
 
 import Card from './Card.js';
-// import FormValidator from './FormValidator.js';
+import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
@@ -12,10 +12,10 @@ import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue
 
 
 
-// const formAutorValidator = new FormValidator(configG, formAutor);
-// formAutorValidator.enableValidation();
-// const formCardsValidator = new FormValidator(configG, formCards);
-// formCardsValidator.enableValidation();
+const formAutorValidator = new FormValidator(configG, formAutor);
+formAutorValidator.enableValidation();
+const formCardsValidator = new FormValidator(configG, formCards);
+formCardsValidator.enableValidation();
 
 const defaultCardList = new Section({
   data: initialCards, // принял массив с карточками
@@ -32,8 +32,9 @@ const defaultCardList = new Section({
 defaultCardList.renderItems();
 const openFormCard = new PopupWithForm('#popupCard', (znacheniia) => {
   const item = {name: znacheniia.name, link: znacheniia.link};
-  const newCard = new Card(item.name, item.link, '#boxCards', () => {
+  const newCard = new Card(inputTitle.value, inputLink.value, '#boxCards', () => {
     openFormCard.open(item);
+    console.log(newCard)
   });
 
    defaultCardList.setItemNewCard(newCard.generateCard());
@@ -41,6 +42,7 @@ const openFormCard = new PopupWithForm('#popupCard', (znacheniia) => {
    openFormCard.close();
   });
   openFormCard.setEventListeners();
+
 
 const openImg = new PopupWithImage('#popupImage')
 const userInfo = new UserInfo('.profile__name', '.profile__profession')
