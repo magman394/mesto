@@ -3,14 +3,18 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, formSubmit){
     super(popupSelector);
     this._formSubmit = formSubmit;
-    this._popupTitle = document.querySelector('#inputTitle');
-    this._popupImg = document.querySelector('#inputLink');
+    this._popupForm = this._section.querySelector('.popup__container');
   }
  _getImputValues() {
    this._cardValues = {};
-    this._cardValues.name = this._popupTitle.value;
-    this._cardValues.link = this._popupImg.value;
+    // this._cardValues.name = this._popupTitle.value;
+    // this._cardValues.link = this._popupImg.value;
+    this._popupForm.querySelectorAll('.popup__input').forEach((input) => {
+      this._cardValues[input.name] = input.value
+    })
+    console.log(this._cardValues)
    return this._cardValues;
+
  }
  setEventListeners() {
    super.setEventListeners();
