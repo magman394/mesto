@@ -34,15 +34,20 @@ _checkInput(inputElement) {
   this._showInputError(inputElement);
   }
 };
-disableSubmitButton() {
-  this._buttonElement.classList.add(this._inactiveButtonClass);
-  this._buttonElement.disbaled = true;
+removeFormErrorContainer() {
+const formErrors = this._validElement.querySelectorAll('.popup__error');
+formErrors.forEach((error) => {
+  error.classList.remove(this._errorClass);
+});
+const inputErrors = this._validElement.querySelectorAll(this._inputSelector);
+inputErrors.forEach((error) => {
+  error.classList.remove(this._inputErrorClass);
+});
 }
 _toggleButtonState() {
-
-  if (this._hasInvalidInput() || this._allInputEmpty()) {
-    this.disableSubmitButton();
+  if (this._hasInvalidInput(this._inputList) || this._allInputEmpty(this._inputList)) {
     this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.setAttribute('disabled', true);
     } else {
       this._buttonElement.classList.remove(this._inactiveButtonClass);
       this._buttonElement.removeAttribute('disabled');
@@ -59,7 +64,7 @@ _setInputListeners() {
       this._checkInput(inputElement);
       this._toggleButtonState();
     });
-
+    this._toggleButtonState();
 })
 }
 
