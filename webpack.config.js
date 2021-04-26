@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
   entry: './src/scripts/index.js',
   target: 'es5',
@@ -15,6 +16,7 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       use: {
         loader: 'babel-loader'
+        
       }
     },
       {
@@ -28,13 +30,14 @@ module.exports = {
           },
           'postcss-loader'
         ],
+
   }, {
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              esModule: false
+            	esModule: false
             }
           },
         ],
@@ -43,9 +46,10 @@ module.exports = {
   },
     plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: './src/index.html'
-      }),
+    	filename: 'index.html',
+    	template: './src/index.html'
+    	}),
     new MiniCssExtractPlugin()
     ]
+
 };
