@@ -16,7 +16,6 @@ const formCardsValidator = new FormValidator(configG, formCards);
 formCardsValidator.removeFormErrorContainer();
 formCardsValidator.enableValidation();
 
-
 const defaultCardList = new Section({
   data: initialCards,
   renderer: (item) => {
