@@ -50,16 +50,7 @@ _toggleButtonState() {
     }
 
 }
-removeFormErrorContainer() {
-  const formErrors = this._validElement.querySelectorAll('.popup__error');
-  formErrors.forEach((error) => {
-    error.classList.remove(this._errorClass);
-  });
-  const inputErrors = this._validElement.querySelectorAll(this._inputSelector);
-  inputErrors.forEach((error) => {
-    error.classList.remove(this._errorClass);
-  });
-}
+
 _setInputListeners() {
    this._inputList = Array.from(this._validElement.querySelectorAll(this._inputSelector));
    this._buttonElement = this._validElement.querySelector(this._submitButtonSelector);

@@ -5,15 +5,21 @@ import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
-import { initialCards, formAutor, formCards, configG, boxCardsForm } from './constants.js';
+import { initialCards, bigImg, boxCards, cardTitleInputValue, cardLinkInputValue,
+  seveCardBotton, bigImgclose, closepopupCard, formLissener, showFormBotton,
+   boxCardsForm, closeFormBotton, showForm, firstName, lastName, firstNameContainer,
+    lastNameContainer, showpopupCard, formAutor, formCards, configG } from './constants.js';
 
 
 
-
+const formAutorValidator = new FormValidator(configG, formAutor);
+formAutorValidator.enableValidation();
+const formCardsValidator = new FormValidator(configG, formCards);
+formCardsValidator.enableValidation();
 
 const defaultCardList = new Section({
-  data: initialCards,
-  renderer: (item) => {
+  data: initialCards, // принял массив с карточками
+  renderer: (item) => { // отрисовал одну карточку и вставил в темпл
     const card = new Card(item.name, item.link, '#boxCards', () => {
       openImg.open(item);
     });
@@ -57,20 +63,10 @@ const userInfo = new UserInfo('.profile__name', '.profile__profession')
 
  boxCardsForm.addEventListener('submit', cardFormSubmitHandler);
 
-
-
   document.querySelector('.profile__add-botton').addEventListener('click', () => {
-    const formCardsValidator = new FormValidator(configG, formCards);
-    formCardsValidator.enableValidation();
-    formCardsValidator.disableSubmitButton();
-    formCardsValidator.removeFormErrorContainer();
     openFormCard.open();
    });
    document.querySelector('.profile__edit-botton').addEventListener('click', () => {
-    const formAutorValidator = new FormValidator(configG, formAutor);
-    formAutorValidator.enableValidation();
-    formAutorValidator.disableSubmitButton();
-    formAutorValidator.removeFormErrorContainer();
     openFormAutor.open();
    });
 
