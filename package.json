@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist && webpack --mode production",
-    "dev": "webpack serve"
+    "dev": "webpack serve --mode development --open"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,11 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "core-js": "^2.5.7"
+    "-": "0.0.1",
+    "ansi": "^0.3.1",
+    "core-js": "^2.6.12",
+    "latest-version": "^5.1.0",
+    "save": "^2.4.0",
+    "strip": "^3.0.0"
   }
 }
