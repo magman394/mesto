@@ -1,11 +1,14 @@
 import '../pages/index.css';
 import Card from './Card.js';
+import { initialCards, boxCardsForm, formAutor, formCards,
+   configG, firstNameContainer, lastNameContainer,
+    showpopupCard, boxCards, bigImg, showForm, showFormBotton, cardConteiner } from './constants.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
-import { initialCards, boxCardsForm, formAutor, formCards, configG } from './constants.js';
+
 
 
 
@@ -19,33 +22,35 @@ formCardsValidator.enableValidation();
 const defaultCardList = new Section({
   data: initialCards,
   renderer: (item) => {
-    const card = new Card(item.name, item.link, '#boxCards', () => {
-      openImg.open(item);
-    });
-    const cardElement = card.generateCard();
+    const cardElement = createCard(item);
+
     defaultCardList.setItem(cardElement);
 
   }
-}, '.elements');
+}, cardConteiner);
 defaultCardList.renderItems();
-const openFormCard = new PopupWithForm('#popupCard', (znacheniia) => {
+const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
   const item = {name: znacheniia.name, link: znacheniia.link};
-  const newCard = new Card(item.name, item.link, '#boxCards', () => {
-    openImg.open(item);
-  });
+  const newCard = createCard(item);
 
-   defaultCardList.setItemNewCard(newCard.generateCard());
+   defaultCardList.setItemNewCard(newCard);
 
    openFormCard.close();
   });
   openFormCard.setEventListeners();
 
+function createCard(item) {
+  const card = new Card(item.name, item.link, boxCards, () => {
+    openImg.open(item);
+});
+return card.generateCard(item);
+}
 
-const openImg = new PopupWithImage('#popupImage')
+const openImg = new PopupWithImage(bigImg)
 openImg.setEventListeners();
-const userInfo = new UserInfo('.profile__name', '.profile__profession')
+const userInfo = new UserInfo(firstNameContainer, lastNameContainer)
 
-  const openFormAutor = new PopupWithForm('#popupAutor', (znacheniia) => {
+  const openFormAutor = new PopupWithForm(showForm, (znacheniia) => {
     const item = {firstName: znacheniia.firstName, lastName: znacheniia.lastName}
     userInfo.setUserInfo(item.firstName, item.lastName);
 
@@ -53,20 +58,20 @@ const userInfo = new UserInfo('.profile__name', '.profile__profession')
   });
   openFormAutor.setEventListeners();
  const cardFormSubmitHandler = () => {
-   const inputPopup1 = input.value
-   const inputPopup2 = input.value
+   const profileAutor = input.value
+   const profileProff = input.value
 
-   userInfo.setUserInfo(inputPopup1, inputPopup2);
+   userInfo.setUserInfo(profileAutor, profileProff);
    openFormAutor.close();
  }
 
  boxCardsForm.addEventListener('submit', cardFormSubmitHandler);
 
-  document.querySelector('.profile__add-botton').addEventListener('click', () => {
+ boxCardsForm.addEventListener('click', () => {
     formCardsValidator.removeFormErrorContainer();
     openFormCard.open();
    });
-   document.querySelector('.profile__edit-botton').addEventListener('click', () => {
+   showFormBotton.addEventListener('click', () => {
     formAutorValidator.removeFormErrorContainer();
     const allUserInfo = userInfo.getUserInfo();
     firstName.value = allUserInfo.firstName

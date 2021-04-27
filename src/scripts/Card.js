@@ -14,11 +14,28 @@ export default class Card {
       .cloneNode(true);
     return cardElement;
   }
+  _setEventListeners() {
+    this._element.querySelector('#cardLink').addEventListener('click', () => {
+     this._handleCardClick();
+    });
+    this._element.querySelector('.element__like').addEventListener('click', () => {
+      this._like();
+     });
+     this._element.querySelector('.element__btn').addEventListener('click', () => {
+      this._delete();
+     });
+
+    }
+  _like() {
+    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+  }
+  _delete() {
+      this._element.remove();
+  }
+
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._like();
-    this._delete();
 
     this._element.querySelector('#cardTitle').textContent = this._title;
     this._element.querySelector('#cardLink').alt = this._title;
@@ -26,28 +43,7 @@ export default class Card {
     return this._element;
 
       }
-  _setEventListeners() {
-    this._element.querySelector('#cardLink').addEventListener('click', () => {
-     this._handleCardClick();
-    });
-    this._element.querySelector('#cardLink').addEventListener('click', () => {
-      this._like();
-     });
-     this._element.querySelector('#cardLink').addEventListener('click', () => {
-      this._delete();
-     });
 
-    }
-  _like() {
-    this._element.querySelector('.element__like').addEventListener('click', (evt) => {
-      evt.target.classList.toggle('element__like_active');
-    });
-  }
-  _delete() {
-    this._element.querySelector('.element__btn').addEventListener('click', () => {
-    document.querySelector('#cardElement').remove();
-  });
-  }
 }
 
 
