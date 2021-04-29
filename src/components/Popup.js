@@ -1,5 +1,5 @@
 
-import { popupAll } from './constants.js';
+
 export default class Popup {
   constructor(popupSelector) {
     this._section = document.querySelector(popupSelector);
