@@ -8,7 +8,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-
+import API from '../components/API.js';
 
 
 
@@ -19,16 +19,16 @@ const formCardsValidator = new FormValidator(configG, formCards);
 formCardsValidator.removeFormErrorContainer();
 formCardsValidator.enableValidation();
 
-const defaultCardList = new Section({
-  data: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard(item);
+// const defaultCardList = new Section({
+//   data: initialCards,
+//   renderer: (item) => {
+//     const cardElement = createCard(item);
 
-    defaultCardList.setItem(cardElement);
+//     defaultCardList.setItem(cardElement);
 
-  }
-}, cardConteiner);
-defaultCardList.renderItems();
+//   }
+// }, cardConteiner);
+// defaultCardList.renderItems();
 const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
   const item = {name: znacheniia.name, link: znacheniia.link};
   const newCard = createCard(item);
@@ -80,3 +80,23 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer)
     openFormAutor.open();
    });
 
+   const api = new API({
+    url: 'https://mesto.nomoreparties.co/v1/cohort-23/cards',
+    headers: {
+      authorization: '9909f88d-db44-41c1-8317-0551a3588138',
+      "Content-Type": "application/json"
+    }
+   });
+const cards = api.getAllTasks();
+cards.then((allcards) => {
+  const defaultCardList = new Section({
+    data: allcards,
+    renderer: (item) => {
+      const cardElement = createCard(item);
+
+      defaultCardList.setItem(cardElement);
+
+    }
+  }, cardConteiner);
+  defaultCardList.renderItems();
+})
