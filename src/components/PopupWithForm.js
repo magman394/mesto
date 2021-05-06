@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._formSubmit = formSubmit;
     this._popupForm = this._section.querySelector('.popup__container');
   }
+
  _getImputValues() {
    this._cardValues = {};
     this._popupForm.querySelectorAll('.popup__input').forEach((input) => {
