@@ -19,6 +19,24 @@ const formCardsValidator = new FormValidator(configG, formCards);
 formCardsValidator.removeFormErrorContainer();
 formCardsValidator.enableValidation();
 
+const api = new API({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-23/',
+  headers: {
+    authorization: '9909f88d-db44-41c1-8317-0551a3588138',
+    "Content-Type": "application/json"
+  }
+ });
+const cards = api.getAllTasks();
+cards.then((allcards) => {
+  const defaultCardList = new Section({
+    data: allcards,
+    renderer: (item) => {
+      const cardElement = createCard(item);
+      defaultCardList.setItem(cardElement);
+    }
+  }, cardConteiner, api);
+  defaultCardList.renderItems();
+}).catch((err) => alert(err));
 // const defaultCardList = new Section({
 //   data: initialCards,
 //   renderer: (item) => {
@@ -73,30 +91,9 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer)
    });
    showFormBotton.addEventListener('click', () => {
     formAutorValidator.removeFormErrorContainer();
-    const allUserInfo = userInfo.getUserInfo();
+    const allUserInfo = api.getUserInfo();
     firstName.value = allUserInfo.firstName
     lastName.value = allUserInfo.lastName
     formAutorValidator.removeFormErrorContainer();
     openFormAutor.open();
    });
-
-   const api = new API({
-    url: 'https://mesto.nomoreparties.co/v1/cohort-23/',
-    headers: {
-      authorization: '9909f88d-db44-41c1-8317-0551a3588138',
-      "Content-Type": "application/json"
-    }
-   });
-const cards = api.getAllTasks();
-cards.then((allcards) => {
-  const defaultCardList = new Section({
-    data: allcards,
-    renderer: (item) => {
-      const cardElement = createCard(item);
-      defaultCardList.setItem(cardElement);
-    }
-  }, cardConteiner, api);
-  defaultCardList.renderItems();
-}).catch((err) => alert(err));
-
-
