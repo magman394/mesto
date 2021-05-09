@@ -76,7 +76,7 @@ const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
    const newCardApi = api.addTask(item);
    newCardApi.then((item) => {
     const cardElement = createCard(item);
-    defaultCardList.setItem(cardElement);
+    defaultCardList.setItemNewCard(cardElement);
 
   });
 

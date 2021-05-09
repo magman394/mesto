@@ -27,7 +27,7 @@ export default class Card {
 
     }
   _like() {
-    this._cardLike.classList.toggle('element__like_active');
+    this._cardLike.classList.toggle('element__likes_active');
   }
   _delete() {
       this._element.remove();
@@ -37,7 +37,7 @@ export default class Card {
     this._element = this._getTemplate();
     this._imageCard = this._element.querySelector('#cardLink');
     this._imageTitle = this._element.querySelector('#cardTitle');
-    this._cardLike = this._element.querySelector('.element__like');
+    this._cardLike = this._element.querySelector('.element__likes_like-btn');
     this._cardDel = this._element.querySelector('.element__btn');
     this._setEventListeners();
 
