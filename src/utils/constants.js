@@ -15,7 +15,7 @@ export const firstName = document.querySelector('#firstName');
 export const lastName = document.querySelector('#lastName');
 export const showpopupCard = '#popupCard';
 export const popupAll = document.querySelector('.popup__container')
-
+export const avatarProfile = '.profile__avatar';
 export const cardConteiner = '.elements';
 export const showForm = '#popupAutor';
 export const bigImg = '#popupImage';

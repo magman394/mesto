@@ -13,11 +13,24 @@ export default class API {
         return Promise.reject('Произошла ошибка');
     })
   }
-  addTask(data) {
+  getUserInfo() {
+    return fetch(this._url + 'users/me', {
+      method: "GET",
+      headers: this._headers }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+        return Promise.reject('Произошла ошибка');
+    })
+  }
+  getAllPromise() {
+    return Promise.all([this.getUserInfo(), this.getAllTasks()]);
+  }
+  addTask(item) {
     return fetch(this._url + 'cards', {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify(data)
+      body: JSON.stringify({name: item.name, link: item.link})
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -26,10 +39,11 @@ export default class API {
     })
 
   }
-  getUserInfo() {
+  patchUserInfo(profileAutor, profileProff) {
     return fetch(this._url + 'users/me', {
-      method: "GET",
-      headers: this._headers }).then((res) => {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({name: profileAutor, about: profileProff}) }).then((res) => {
       if (res.ok) {
         return res.json();
       }
