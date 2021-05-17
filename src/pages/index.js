@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
-import { popupDelImg, DelSubmit, boxCardsForm, formAutor, formCards,
+import { submitDel, popupDelImg, DelSubmit, boxCardsForm, formAutor, formCards,
    configG, firstNameContainer, lastNameContainer,
     showpopupCard, boxCards, bigImg, showForm, showFormBotton, avatarProfile } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
@@ -27,20 +27,20 @@ function createCard(item) {
 return card.generateCard(item);
 }
 const defaultCardList = new Section({
-  renderer: (item) => { //беру все карточки
+  renderer: (item) => {
 
-    const cardElement = createCard({ //создаю новую карточку
+    const cardElement = createCard({
       name: item.name,
       link: item.link,
       likes: item.likes,
       id: item.owner._id
     },
-    boxCards, //нахожу темплейт с разметкой для каждой карточки
-    () => openImg.open(item) //навешиваю слушатели для открытия
+    boxCards,
+    () => openImg.open(item)
   )
 
-  return cardElement // возвращаю функцию создания карточки с данными из новой карточки
-}, containerSelector: '.elements' //передаю разметку куда сложить карточки
+  return cardElement
+}, containerSelector: '.elements'
 }
 )
 const api = new API({
@@ -56,7 +56,7 @@ api.getAllPromise().then((arg) => {
   const [getUserInfo, getAllTasks] = arg;
   userInfo.setUserInfo(getUserInfo.name, getUserInfo.about, getUserInfo.avatar);
   defaultCardList.renderItems(getAllTasks);
-
+console.log(getAllTasks)
 
 }).catch((err) => alert(err));
 
@@ -118,4 +118,10 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
    });
    const delSubmit = new PopupWithSubmit(popupDelImg, DelSubmit);
    delSubmit.setEventListeners();
+   submitDel.addEventListener('click', () => {
+    api.delmyCard();
+    delSubmit.close();
+   });
+
+
 

@@ -1,9 +1,3 @@
 .element__btn_delete {
-  position: absolute;
-  right: 15px;
-  top: -267px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  opacity: 0;
+  position: relative;
 }

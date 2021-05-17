@@ -25,6 +25,7 @@ export default class API {
   }
   getAllPromise() {
     return Promise.all([this.getUserInfo(), this.getAllTasks()]);
+
   }
   addTask(item) {
     return fetch(this._url + 'cards', {
@@ -35,6 +36,21 @@ export default class API {
       if (res.ok) {
         return res.json();
       }
+        return Promise.reject('Произошла ошибка');
+    })
+
+  }
+  delmyCard() {
+    return fetch(this._url + 'cards/', {
+      method: "DELETE",
+      headers: this._headers,
+      body: JSON.stringify(item.id)
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+
+      }
+      console.log(this._headers)
         return Promise.reject('Произошла ошибка');
     })
 

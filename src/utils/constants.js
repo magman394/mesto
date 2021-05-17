@@ -30,7 +30,7 @@ export const showFormBotton = document.querySelector('.profile__edit-botton');
 export const boxCardsForm = document.querySelector('.profile__add-botton');
 export const seveProfile = document.querySelector('#save');
 export const delBotton = document.querySelector('.element__btn_delete');
-
+export const submitDel = document.querySelector('#deleteCard');
 export const configG =
    {
    inputSelector: '.popup__input',
