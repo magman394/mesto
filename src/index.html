@@ -61,6 +61,13 @@
       <h2 class="popup__title" id="popupTtl"></h2>
     </div>
   </div>
+  <div class="popup" id="popupDelCard">
+    <div class="popup__container">
+      <h2 class="popup__title popup__title_not_margin">Вы уверены?</h2>
+      <button type="button" class="popup__close popup__close_cards opacity-link" id="closeImg"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
+      <button id="saveCard" type="submit" class="popup__submit popup__submit_mini_margin">Да</button>
+    </div>
+  </div>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
@@ -75,7 +82,7 @@
       <h3 class="element__title" id="cardTitle"></h3>
       <div class="element__likes">
         <button type="button" class="element__likes element__likes_like-btn"></button>
-        <p class="element__likes element__likes_like-count">3</p>
+        <p class="element__likes element__likes_like-count"></p>
       </div>
     </div>
 
