@@ -40,17 +40,17 @@ export default class API {
     })
 
   }
-  delmyCard() {
-    return fetch(this._url + 'cards/', {
+  delmyCard(id) {
+    return fetch(`${this._url + 'cards/'}${id}`,  {
       method: "DELETE",
       headers: this._headers,
-      body: JSON.stringify(item.id)
     }).then((res) => {
       if (res.ok) {
         return res.json();
 
+
       }
-      console.log(this._headers)
+
         return Promise.reject('Произошла ошибка');
     })
 

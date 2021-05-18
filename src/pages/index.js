@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
-import { submitDel, popupDelImg, DelSubmit, boxCardsForm, formAutor, formCards,
+import { DelCard, showDelPopup, submitDel, cardConteiner, DelSubmit, boxCardsForm, formAutor, formCards,
    configG, firstNameContainer, lastNameContainer,
     showpopupCard, boxCards, bigImg, showForm, showFormBotton, avatarProfile } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
@@ -21,28 +21,12 @@ formCardsValidator.removeFormErrorContainer();
 formCardsValidator.enableValidation();
 
 function createCard(item) {
-  const card = new Card(item.name, item.link, item.likes, item.id, boxCards, () => {
+  const card = new Card(item.name, item.link, item.likes, item.id, item.cardid, boxCards, () => {
     openImg.open(item);
-});
+}, api);
 return card.generateCard(item);
 }
-const defaultCardList = new Section({
-  renderer: (item) => {
 
-    const cardElement = createCard({
-      name: item.name,
-      link: item.link,
-      likes: item.likes,
-      id: item.owner._id
-    },
-    boxCards,
-    () => openImg.open(item)
-  )
-
-  return cardElement
-}, containerSelector: '.elements'
-}
-)
 const api = new API({
   url: 'https://mesto.nomoreparties.co/v1/cohort-24/',
   headers: {
@@ -56,30 +40,42 @@ api.getAllPromise().then((arg) => {
   const [getUserInfo, getAllTasks] = arg;
   userInfo.setUserInfo(getUserInfo.name, getUserInfo.about, getUserInfo.avatar);
   defaultCardList.renderItems(getAllTasks);
-console.log(getAllTasks)
 
 }).catch((err) => alert(err));
 
+const defaultCardList = new Section({
+  renderer: (item) => {
 
+    const cardElement = createCard({
+      name: item.name,
+      link: item.link,
+      likes: item.likes,
+      id: item.owner._id,
+      cardid: item._id
+    },
 
-// const defaultCardList = new Section({
-//   data: initialCards,
-//   renderer: (item) => {
-//     const cardElement = createCard(item);
+  )
 
-//     defaultCardList.setItem(cardElement);
+  return cardElement
+}, containerSelector: '.elements'
+ , api
+}
+)
 
-//   }
-// }, cardConteiner);
-// defaultCardList.renderItems();
 const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
-  const item = {name: znacheniia.name, link: znacheniia.link};
-  // const newCard = createCard(item);
+  const item = {name: znacheniia.name, link: znacheniia.link}; //Взял из формы создания карточки name и link
 
-   const newCardApi = api.addTask(item);
+
+   const newCardApi = api.addTask(item); // Передал их в API, которая создаст объект на сервере, но не могу понять как теперь вернуть этот объект
    newCardApi.then((item) => {
-    const cardElement = createCard(item);
-    defaultCardList.setItemNewCard(cardElement);
+
+    // const cardElement = createCard(item); создаю элемент, но пока тут лежит локальная карточка
+
+    defaultCardList.setItemNewCard(newCardApi); // отрисовываю карточку в начале списка
+
+
+
+
 
   });
 
@@ -116,10 +112,12 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
     });
 
    });
-   const delSubmit = new PopupWithSubmit(popupDelImg, DelSubmit);
+   const delSubmit = new PopupWithSubmit(showDelPopup, DelSubmit, defaultCardList);
    delSubmit.setEventListeners();
+
    submitDel.addEventListener('click', () => {
-    api.delmyCard();
+
+    // api.delmyCard();
     delSubmit.close();
    });
 

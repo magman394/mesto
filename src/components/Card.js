@@ -1,12 +1,16 @@
 
 export default class Card {
-  constructor(name, link, likes, id, cardSelector, handleCardClick) {
+  constructor(name, link, likes, id, cardid, cardSelector, handleCardClick, api) {
       this._title = name;
       this._link = link;
       this._likes = likes;
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
+      this._cardid = cardid;
       this._id = id;
+      this._api = api;
+
+
   }
   _getTemplate() {
     const cardElement = document
@@ -23,9 +27,10 @@ export default class Card {
     this._cardLike.addEventListener('click', () => {
       this._like();
      });
-     this._cardDel.addEventListener('click', () => {
-      this._delete();
+      this._cardDel.addEventListener('click', () => {
+      this._delCardClick();
      });
+
     }
   _like() {
     this._cardLike.classList.toggle('element__likes_active');
@@ -42,17 +47,23 @@ export default class Card {
       this._cardDel.classList.add('element__btn_delete');
       this._bottonDel.classList.add('element__btn_delete-active');
     } else {
-      this._cardDel.classList.add('element__btn_delete');
+      this._cardDel.classList.remove('element__btn_delete');
       this._bottonDel.classList.add('element__btn_delete-active');
     }
   }
+  _delCardClick() {
+    this._api.delmyCard(this._cardid)
+    .then(() => {
+      this._element.remove();
 
+    }).catch((err) => alert(err));
+   }
   generateCard() {
     this._element = this._getTemplate();
     this._imageCard = this._element.querySelector('#cardLink');
     this._imageTitle = this._element.querySelector('#cardTitle');
     this._cardLike = this._element.querySelector('.element__likes_like-btn');
-    this._cardDel = this._element.querySelector('.element__btn');
+    this._cardDel = this._element.querySelector('.element__btn_delete');
     this._whatiscard();
     this._allLikes = this._element.querySelector('.element__likes_like-count');
     this._setEventListeners();
