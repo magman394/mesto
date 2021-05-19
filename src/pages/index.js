@@ -69,7 +69,7 @@ const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
    const newCardApi = api.addTask(item); // Передал их в API, которая создаст объект на сервере, но не могу понять как теперь вернуть этот объект
    newCardApi.then((item) => {
 
-    const cardElement = createCard(item); создаю элемент, но пока тут лежит локальная карточка
+    const cardElement = createCard(item); // создаю элемент, но пока тут лежит локальная карточка
 
     defaultCardList.setItemNewCard(cardElement); // отрисовываю карточку в начале списка
 
