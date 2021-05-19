@@ -10,7 +10,6 @@ export default class Card {
       this._id = id;
       this._api = api;
 
-
   }
   _getTemplate() {
     const cardElement = document
@@ -41,8 +40,10 @@ export default class Card {
 
   }
   _whatiscard() {
+    this._cardDel = this._element.querySelector('.element__btn_delete');
     this._bottonDel = this._cardDel.querySelector('#bottonDel')
     if (this._id === '2f7202266f3b347a05adda12') {
+
       this._cardDel.classList.remove('element__btn');
       this._cardDel.classList.add('element__btn_delete');
       this._bottonDel.classList.add('element__btn_delete-active');
@@ -59,11 +60,12 @@ export default class Card {
     }).catch((err) => alert(err));
    }
   generateCard() {
+
     this._element = this._getTemplate();
     this._imageCard = this._element.querySelector('#cardLink');
     this._imageTitle = this._element.querySelector('#cardTitle');
     this._cardLike = this._element.querySelector('.element__likes_like-btn');
-    this._cardDel = this._element.querySelector('.element__btn_delete');
+
     this._whatiscard();
     this._allLikes = this._element.querySelector('.element__likes_like-count');
     this._setEventListeners();

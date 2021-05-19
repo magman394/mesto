@@ -1,23 +1,25 @@
 import Popup from './Popup.js';
 
 export default class PopupWithSubmit extends Popup {
-  constructor(popupSelector, submitDel, defaultCardList){
+  constructor(popupSelector, submitDel, api){
     super(popupSelector);
     this._delSubmit = document.querySelector(submitDel);
-    this._defaultCardList = defaultCardList
+    this._api = api
+
 
   }
-  open() {
-    this._section.classList.add('popup_is-opened');
-    document.addEventListener('keydown', this._handleEscClose)
-
-  }
-
+  _delCardClick() {
+    this._api.delmyCard(this._cardid)
+    .then(() => {
+      this._element.remove();
+    }).catch((err) => alert(err));
+   }
  setEventListeners() {
+
   super.setEventListeners();
-  // this._delSubmit.addEventListener('click', () => {
-  //   // api.delmyCard();
-  //   this.close();
-  //  });
+  this._delSubmit.addEventListener('click', () => {
+    this._delCardClick();
+
+   });
   }
 }

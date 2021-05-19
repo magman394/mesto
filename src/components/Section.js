@@ -4,6 +4,7 @@ export default class Section {
     this._renderer = renderer;
     this._section = document.querySelector(containerSelector);
     this._api = api;
+
   }
 
   setItem(item) {
@@ -16,6 +17,7 @@ export default class Section {
   renderItems(array) {
     array.forEach(item => {
       this.setItem(this._renderer(item));
+
     });
   }
 }

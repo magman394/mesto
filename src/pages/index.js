@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
-import { DelCard, showDelPopup, submitDel, cardConteiner, DelSubmit, boxCardsForm, formAutor, formCards,
+import { DelCard, showDelPopup, submitDel, cardConteiner, delBotton, boxCardsForm, formAutor, formCards,
    configG, firstNameContainer, lastNameContainer,
     showpopupCard, boxCards, bigImg, showForm, showFormBotton, avatarProfile } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
@@ -21,6 +21,7 @@ formCardsValidator.removeFormErrorContainer();
 formCardsValidator.enableValidation();
 
 function createCard(item) {
+
   const card = new Card(item.name, item.link, item.likes, item.id, item.cardid, boxCards, () => {
     openImg.open(item);
 }, api);
@@ -55,16 +56,14 @@ const defaultCardList = new Section({
     },
 
   )
-
   return cardElement
 }, containerSelector: '.elements'
- , api
+
 }
 )
 
 const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
-  const item = {name: znacheniia.name, link: znacheniia.link}; //Взял из формы создания карточки name и link
-
+  const item = {name: znacheniia.name, link: znacheniia.link, id: znacheniia.id}; //Взял из формы создания карточки name и link
 
    const newCardApi = api.addTask(item); // Передал их в API, которая создаст объект на сервере, но не могу понять как теперь вернуть этот объект
    newCardApi.then((item) => {
@@ -112,14 +111,12 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
     });
 
    });
-   const delSubmit = new PopupWithSubmit(showDelPopup, DelSubmit, defaultCardList);
+
+   const delSubmit = new PopupWithSubmit(showDelPopup, submitDel, api);
+
+
    delSubmit.setEventListeners();
 
-   submitDel.addEventListener('click', () => {
-
-    // api.delmyCard();
-    delSubmit.close();
-   });
 
 
 

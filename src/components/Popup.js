@@ -4,10 +4,12 @@ export default class Popup {
   constructor(popupSelector) {
     this._section = document.querySelector(popupSelector);
 
+
   }
   open() {
     this._section.classList.add('popup_is-opened');
     document.addEventListener('keydown', this._handleEscClose)
+
   }
   close() {
     this._section.classList.remove('popup_is-opened');
