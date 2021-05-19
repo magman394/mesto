@@ -13,13 +13,13 @@
   </header>
   <main class="content">
     <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/avatar-image.jpg')%>" alt="аватарка">
+        <img class="profile__avatar" src="" alt="аватарка">
         <div class="profile__profile-info">
           <div class="profile__edit-name">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__edit-botton opacity-link"><img src="<%=require('./images/edit-botton.svg')%>" alt="кнопка редактирования"></button>
           </div>
-          <h2 class="profile__profession">Исследователь океана</h2>
+          <h2 class="profile__profession"></h2>
         </div>
       <button type="button" class="profile__add-botton opacity-link"><img src="<%=require('./images/add-botton.svg')%>" alt="кнопка добавления"></button>
     </section>
@@ -61,6 +61,13 @@
       <h2 class="popup__title" id="popupTtl"></h2>
     </div>
   </div>
+  <div class="popup" id="popupDelCard">
+    <div class="popup__container">
+      <h2 class="popup__title popup__title_not_margin">Вы уверены?</h2>
+      <button type="button" class="popup__close popup__close_cards opacity-link" id="closeImg"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
+      <button id="deleteCard" type="submit" class="popup__submit popup__submit_mini_margin">Да</button>
+    </div>
+  </div>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
@@ -68,14 +75,17 @@
 <template id="boxCards">
   <div class="element" id="cardElement">
     <img id="cardLink" class="element__image" src="#" alt="фото">
-    <div class="element__btn">
-      <button class="element__btn element__btn_delete opacity-link" type="button"><img src="<%=require('./images/delete.png')%>" width="18" height="17" alt="Удалить"></button>
+    <div class="element__btn_delete">
+      <button id="bottonDel" class="element__btn opacity-link" type="button"><img src="<%=require('./images/delete.png')%>" width="18" height="17" alt="Удалить"></button>
     </div>
     <div class="element__info">
       <h3 class="element__title" id="cardTitle"></h3>
-      <button type="button" class="element__like"></button>
+      <div class="element__likes">
+        <button type="button" class="element__likes element__likes_like-btn"></button>
+        <p class="element__likes element__likes_like-count"></p>
+      </div>
     </div>
-  </div>
+
 </template>
 </body>
 </html>

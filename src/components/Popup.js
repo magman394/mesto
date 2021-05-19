@@ -4,6 +4,7 @@ export default class Popup {
   constructor(popupSelector) {
     this._section = document.querySelector(popupSelector);
 
+
   }
   open() {
     this._section.classList.add('popup_is-opened');
