@@ -22,8 +22,9 @@ formCardsValidator.enableValidation();
 
 function createCard(item) {
 
-  const card = new Card(item.name, item.link, item.likes, item.id, item.cardid, boxCards, () => {
-    openImg.open(item);
+  const card = new Card(item.name, item.link, item.likes, item.owner._id, item.cardid, boxCards, () => {
+    openImg.open(item);},  () => {
+      delSubmit.open(item);
 }, api);
 return card.generateCard(item);
 }
@@ -41,7 +42,6 @@ api.getAllPromise().then((arg) => {
   const [getUserInfo, getAllTasks] = arg;
   userInfo.setUserInfo(getUserInfo.name, getUserInfo.about, getUserInfo.avatar);
   defaultCardList.renderItems(getAllTasks);
-
 }).catch((err) => alert(err));
 
 const defaultCardList = new Section({
@@ -51,11 +51,12 @@ const defaultCardList = new Section({
       name: item.name,
       link: item.link,
       likes: item.likes,
-      id: item.owner._id,
+      owner: {_id: item.owner._id},
       cardid: item._id
     },
 
   )
+
   return cardElement
 }, containerSelector: '.elements'
 
@@ -68,7 +69,7 @@ const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
    const newCardApi = api.addTask(item); // Передал их в API, которая создаст объект на сервере, но не могу понять как теперь вернуть этот объект
    newCardApi.then((item) => {
 
-    const cardElement = createCard(item); // создаю элемент, но пока тут лежит локальная карточка
+    const cardElement = createCard(item); // создаю элемент
 
     defaultCardList.setItemNewCard(cardElement); // отрисовываю карточку в начале списка
 
