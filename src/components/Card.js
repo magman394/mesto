@@ -11,6 +11,7 @@ export default class Card {
       this._id = _id;
       this._api = api;
       this._popupopen = delSubmit;
+      console.log(this._popupopen)
 
   }
   _getTemplate() {
