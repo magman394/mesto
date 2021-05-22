@@ -22,7 +22,7 @@ formCardsValidator.enableValidation();
 
 function createCard(item) {
 
-  const card = new Card(item.name, item.link, item.likes, item.owner._id, item.cardid, boxCards, () => {
+  const card = new Card(item.name, item.link, item.likes, item.owner._id, item._id, boxCards, () => {
     openImg.open(item);},
       delSubmit
 , api);
@@ -52,7 +52,7 @@ const defaultCardList = new Section({
       link: item.link,
       likes: item.likes,
       owner: {_id: item.owner._id},
-      cardid: item._id
+      _id: item._id
     },
 
   )
