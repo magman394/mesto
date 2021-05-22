@@ -6,20 +6,20 @@ export default class PopupWithSubmit extends Popup {
     this._api = api
   }
 
-  open(item) {
-    super.open(item);
-
-    this._setEventListeners(item)
-
-  }
-  _delCardClick(item) {
-    this._api.delmyCard(item.cardid)
+  open(fn) {
+    super.open();
+    this._actionFn = fn;
+    this.setEventListeners()
 
   }
- _setEventListeners(item) {
+
+ setEventListeners() {
   super.setEventListeners();
+
   this._delSubmit.addEventListener('click', () => {
-    this._delCardClick(item);
+
+    this._actionFn();
+
     super.close();
 
    });

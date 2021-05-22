@@ -23,9 +23,9 @@ formCardsValidator.enableValidation();
 function createCard(item) {
 
   const card = new Card(item.name, item.link, item.likes, item.owner._id, item.cardid, boxCards, () => {
-    openImg.open(item);},  () => {
-      delSubmit.open(item);
-}, api);
+    openImg.open(item);},
+      delSubmit
+, api);
 return card.generateCard(item);
 }
 
@@ -64,7 +64,7 @@ const defaultCardList = new Section({
 )
 
 const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
-  const item = {name: znacheniia.name, link: znacheniia.link, id: znacheniia.id}; //Взял из формы создания карточки name и link
+  const item = {name: znacheniia.name, link: znacheniia.link, id: znacheniia.cardid}; //Взял из формы создания карточки name и link
 
    const newCardApi = api.addTask(item); // Передал их в API, которая создаст объект на сервере, но не могу понять как теперь вернуть этот объект
    newCardApi.then((item) => {
@@ -116,7 +116,7 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
    const delSubmit = new PopupWithSubmit(showDelPopup, submitDel, api);
 
 
-   delSubmit.setEventListeners();
+
 
 
 

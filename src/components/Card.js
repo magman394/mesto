@@ -11,7 +11,7 @@ export default class Card {
       this._id = _id;
       this._api = api;
       this._popupopen = delSubmit;
-      console.log(this._popupopen)
+
 
   }
   _getTemplate() {
@@ -22,7 +22,7 @@ export default class Card {
       .cloneNode(true);
     return cardElement;
   }
-  _setEventListeners(item) {
+  _setEventListeners() {
 
     this._imageCard.addEventListener('click', () => {
      this._handleCardClick();
@@ -31,18 +31,23 @@ export default class Card {
       this._like();
      });
       this._cardDel.addEventListener('click', () => {
-        this._popupopen(item);
+        this.delCardClick();
+
      });
 
     }
   _like() {
-    this._cardLike.classList.toggle('element__likes_active');
-  }
-  // _delete() {
 
-  //     document.querySelector('#popupDelCard').classList.add('popup_is-opened');
+    this._cardLike.classList.add('element__likes_active');
 
-  // }
+    this._api.likeCard(this._cardid)
+    .then(() => {
+
+    }).catch((err) => alert(err));
+
+   }
+
+
   _whatiscard() {
     this._cardDel = this._element.querySelector('.element__btn_delete');
     this._bottonDel = this._cardDel.querySelector('#bottonDel')
@@ -56,13 +61,16 @@ export default class Card {
       this._bottonDel.classList.add('element__btn_delete-active');
     }
   }
-  // _delCardClick() {
-  //   this._api.delmyCard(this._cardid)
-  //   .then(() => {
-  //     this._element.remove();
+  delCardClick() {
 
-  //   }).catch((err) => alert(err));
-  //  }
+    this._popupopen.open(() => {
+    this._api.delmyCard(this._cardid)
+    .then(() => {
+      this._element.remove();
+
+    }).catch((err) => alert(err));
+  })
+   }
   generateCard() {
 
     this._element = this._getTemplate();
@@ -72,7 +80,7 @@ export default class Card {
 
     this._whatiscard();
     this._allLikes = this._element.querySelector('.element__likes_like-count');
-    this._setEventListeners(this._cardid);
+    this._setEventListeners();
 
 
     this._imageTitle.textContent = this._title;

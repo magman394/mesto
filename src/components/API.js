@@ -55,6 +55,21 @@ export default class API {
     })
 
   }
+  likeCard(id) {
+    return fetch(`${this._url + 'cards/likes/'}${id}`,  {
+      method: "PUT",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+
+
+      }
+
+        return Promise.reject('Произошла ошибка');
+    })
+
+  }
   patchUserInfo(profileAutor, profileProff) {
     return fetch(this._url + 'users/me', {
       method: "PATCH",
