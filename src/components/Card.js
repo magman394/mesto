@@ -1,14 +1,17 @@
 
 export default class Card {
-  constructor(name, link, likes, id, cardid, cardSelector, handleCardClick, api) {
+  constructor(name, link, likes, _id, cardid, cardSelector, handleCardClick, delSubmit, api) {
       this._title = name;
       this._link = link;
       this._likes = likes;
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
       this._cardid = cardid;
-      this._id = id;
+
+      this._id = _id;
       this._api = api;
+      this._popupopen = delSubmit;
+      console.log(this._popupopen)
 
   }
   _getTemplate() {
@@ -19,7 +22,8 @@ export default class Card {
       .cloneNode(true);
     return cardElement;
   }
-  _setEventListeners() {
+  _setEventListeners(item) {
+
     this._imageCard.addEventListener('click', () => {
      this._handleCardClick();
     });
@@ -27,18 +31,18 @@ export default class Card {
       this._like();
      });
       this._cardDel.addEventListener('click', () => {
-      this._delCardClick();
+        this._popupopen(item);
      });
 
     }
   _like() {
     this._cardLike.classList.toggle('element__likes_active');
   }
-  _delete() {
+  // _delete() {
 
-      document.querySelector('#popupDelCard').classList.add('popup_is-opened');
+  //     document.querySelector('#popupDelCard').classList.add('popup_is-opened');
 
-  }
+  // }
   _whatiscard() {
     this._cardDel = this._element.querySelector('.element__btn_delete');
     this._bottonDel = this._cardDel.querySelector('#bottonDel')
@@ -52,13 +56,13 @@ export default class Card {
       this._bottonDel.classList.add('element__btn_delete-active');
     }
   }
-  _delCardClick() {
-    this._api.delmyCard(this._cardid)
-    .then(() => {
-      this._element.remove();
+  // _delCardClick() {
+  //   this._api.delmyCard(this._cardid)
+  //   .then(() => {
+  //     this._element.remove();
 
-    }).catch((err) => alert(err));
-   }
+  //   }).catch((err) => alert(err));
+  //  }
   generateCard() {
 
     this._element = this._getTemplate();
@@ -68,7 +72,9 @@ export default class Card {
 
     this._whatiscard();
     this._allLikes = this._element.querySelector('.element__likes_like-count');
-    this._setEventListeners();
+    this._setEventListeners(this._cardid);
+
+
     this._imageTitle.textContent = this._title;
     this._allLikes.textContent = this._likes.length;
     this._imageCard.alt = this._title;
