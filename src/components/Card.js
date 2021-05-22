@@ -38,7 +38,7 @@ export default class Card {
     }
   _like() {
 
-    this._cardLike.classList.add('element__likes_active');
+    this._cardLike.classList.toggle('element__likes_active');
 
     this._api.likeCard(this._cardid)
     .then(() => {
