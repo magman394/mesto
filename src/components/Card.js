@@ -1,16 +1,16 @@
 
 export default class Card {
-  constructor(name, link, likes, _id, cardid, cardSelector, handleCardClick, delSubmit, api) {
+  constructor(name, link, likes, _id, cardid, cardSelector, handleCardClick, delSubmit, api, mylike) {
       this._title = name;
       this._link = link;
       this._likes = likes;
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
       this._cardid = cardid;
-
       this._id = _id;
       this._api = api;
       this._popupopen = delSubmit;
+      this._myLike = mylike;
 
 
   }
@@ -36,16 +36,39 @@ export default class Card {
      });
 
     }
-  _like() {
+  _mylike() {
 
+    this._myLike.forEach(item => {
+      if (item._id === '2f7202266f3b347a05adda12') {
+
+        this._cardLike.classList.add('element__likes_active');
+      } else {
+
+        this._cardLike.classList.remove('element__likes_active');
+      }
+    });
+
+  }
+
+  _like() {
     this._cardLike.classList.toggle('element__likes_active');
 
-    this._api.likeCard(this._cardid)
-    .then(() => {
+    this._myLike.forEach(item => {
+      if (item._id !== '2f7202266f3b347a05adda12') {
+        console.log(item._id)
+        this._api.likeCard(this._cardid)
+        .then(() => {
+        }).catch((err) => alert(err));
+      } else {
+        console.log(item._id)
+        this._api.dellikeCard(this._cardid)
+        .then(() => {
+        }).catch((err) => alert(err));
 
-    }).catch((err) => alert(err));
+      }
+    });
 
-   }
+}
 
 
   _whatiscard() {
@@ -77,7 +100,7 @@ export default class Card {
     this._imageCard = this._element.querySelector('#cardLink');
     this._imageTitle = this._element.querySelector('#cardTitle');
     this._cardLike = this._element.querySelector('.element__likes_like-btn');
-
+    this._mylike();
     this._whatiscard();
     this._allLikes = this._element.querySelector('.element__likes_like-count');
     this._setEventListeners();

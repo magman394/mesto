@@ -70,6 +70,21 @@ export default class API {
     })
 
   }
+  dellikeCard(id) {
+    return fetch(`${this._url + 'cards/likes/'}${id}`,  {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+
+
+      }
+
+        return Promise.reject('Произошла ошибка');
+    })
+
+  }
   patchUserInfo(profileAutor, profileProff) {
     return fetch(this._url + 'users/me', {
       method: "PATCH",

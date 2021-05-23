@@ -25,7 +25,7 @@ function createCard(item) {
   const card = new Card(item.name, item.link, item.likes, item.owner._id, item._id, boxCards, () => {
     openImg.open(item);},
       delSubmit
-, api);
+, api, item.likes);
 return card.generateCard(item);
 }
 
