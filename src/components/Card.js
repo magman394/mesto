@@ -1,6 +1,6 @@
 
 export default class Card {
-  constructor(name, link, likes, _id, cardid, cardSelector, handleCardClick, delSubmit, api, mylike) {
+  constructor(name, link, likes, _id, cardid, cardSelector, handleCardClick, delSubmit, api, arrlikes) {
       this._title = name;
       this._link = link;
       this._likes = likes;
@@ -10,7 +10,7 @@ export default class Card {
       this._id = _id;
       this._api = api;
       this._popupopen = delSubmit;
-      this._myLike = mylike;
+      this._arrLikes = arrlikes;
 
 
   }
@@ -27,8 +27,22 @@ export default class Card {
     this._imageCard.addEventListener('click', () => {
      this._handleCardClick();
     });
+    // ставлю слушатель на кнопку лайка
     this._cardLike.addEventListener('click', () => {
-      this._like();
+    //беру  массив с лайками и нахожу id людей, кто их ставил
+      this._arrLikes.forEach(item => {
+        this._arrLikeID = item._id
+        console.log(this._arrLikeID)
+      });
+      // если мой
+      if (this._arrLikeID === '2f7202266f3b347a05adda12')
+      { this._api.dellikeCard(this._cardid)
+        this._dellike();
+      // если моего нет
+      } else {
+        this._api.likeCard(this._cardid);
+        this._addlike();
+      }
      });
       this._cardDel.addEventListener('click', () => {
         this.delCardClick();
@@ -38,42 +52,27 @@ export default class Card {
     }
   _mylike() {
 
-    this._myLike.forEach(item => {
+    this._arrLikes.forEach(item => {
       if (item._id === '2f7202266f3b347a05adda12') {
-
         this._cardLike.classList.add('element__likes_active');
       } else {
-
         this._cardLike.classList.remove('element__likes_active');
       }
     });
+  }
+    // меняю цвет лайка, отнимаю от суммы 1 лайк и удаляю лайк с сервера
+  _dellike() {
+        this._cardLike.classList.toggle('element__likes_active');
+        this._allLikes.textContent = this._likes.length - 1;
+
+}
+    // меняю цвет лайка, прибавляю к сумме 1 лайк и отпраляю пут на добавление
+  _addlike() {
+    this._cardLike.classList.toggle('element__likes_active');
+    this._allLikes.textContent = this._likes.length + 1;
+
 
   }
-
-  _like() {
-    this._cardLike.classList.toggle('element__likes_active');
-
-    this._myLike.forEach(item => {
-      this._myLikeID = item._id
-    });
-
-      if (this._myLikeID !== '2f7202266f3b347a05adda12') {
-        this._allLikes.textContent = this._likes.length + 1;
-        this._api.likeCard(this._cardid)
-        .then(() => {
-        }).catch((err) => alert(err));
-      } else {
-        this._allLikes.textContent = this._likes.length - 1;
-        this._api.dellikeCard(this._cardid)
-        .then(() => {
-        }).catch((err) => alert(err));
-
-      }
-
-      return this._element;
-}
-
-
   _whatiscard() {
     this._cardDel = this._element.querySelector('.element__btn_delete');
     this._bottonDel = this._cardDel.querySelector('#bottonDel')
