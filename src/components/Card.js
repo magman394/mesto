@@ -34,8 +34,9 @@ export default class Card {
         this._arrLikeID = item._id
         console.log(this._arrLikeID)
       });
+      this._botton = this._element.querySelector('#likebutton');
       // если мой
-      if (this._arrLikeID === '2f7202266f3b347a05adda12')
+      if (this._botton.classList.contains('element__likes_active'))
       { this._api.dellikeCard(this._cardid)
         this._dellike();
       // если моего нет
@@ -46,7 +47,6 @@ export default class Card {
      });
       this._cardDel.addEventListener('click', () => {
         this.delCardClick();
-
      });
 
     }
@@ -63,13 +63,12 @@ export default class Card {
     // меняю цвет лайка, отнимаю от суммы 1 лайк и удаляю лайк с сервера
   _dellike() {
         this._cardLike.classList.toggle('element__likes_active');
-        this._allLikes.textContent = this._likes.length - 1;
-
+        this._allLikes.textContent = this._likes.length -= 1;
 }
     // меняю цвет лайка, прибавляю к сумме 1 лайк и отпраляю пут на добавление
   _addlike() {
     this._cardLike.classList.toggle('element__likes_active');
-    this._allLikes.textContent = this._likes.length + 1;
+    this._allLikes.textContent = this._likes.length += 1;
 
 
   }
