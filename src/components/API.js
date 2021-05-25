@@ -96,4 +96,16 @@ export default class API {
         return Promise.reject('Произошла ошибка');
     })
   }
+  patchUserAvatar(profileAvatar) {
+    console.log(profileAvatar)
+    return fetch(this._url + 'users/me/avatar', {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({avatar: profileAvatar}) }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+        return Promise.reject('Произошла ошибка');
+    })
+  }
 }

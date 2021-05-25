@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
-import { DelCard, showDelPopup, submitDel, cardConteiner, delBotton, boxCardsForm, formAutor, formCards,
+import { showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, cardConteiner, delBotton, boxCardsForm, formAutor, formCards,
    configG, firstNameContainer, lastNameContainer,
     showpopupCard, boxCards, bigImg, showForm, showFormBotton, avatarProfile } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
@@ -8,6 +8,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithSubmit from '../components/PopupWithSubmit.js';
+import PopupWithAvatar from '../components/PopupWithAvatar.js';
 import UserInfo from '../components/UserInfo.js';
 import API from '../components/API.js';
 
@@ -62,25 +63,6 @@ const defaultCardList = new Section({
 }
 )
 
-const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
-  const item = {name: znacheniia.name, link: znacheniia.link, id: znacheniia.cardid}; //Взял из формы создания карточки name и link
-
-   const newCardApi = api.addTask(item); // Передал их в API, которая создаст объект на сервере, но не могу понять как теперь вернуть этот объект
-   newCardApi.then((item) => {
-
-    const cardElement = createCard(item); // создаю элемент
-
-    defaultCardList.setItemNewCard(cardElement); // отрисовываю карточку в начале списка
-
-
-
-
-
-  });
-
-   openFormCard.close();
-  });
-  openFormCard.setEventListeners();
 
 
 
@@ -91,7 +73,7 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
   const openFormAutor = new PopupWithForm(showForm, (znacheniia) => {
     const item = {firstName: znacheniia.firstName, lastName: znacheniia.lastName}
     api.patchUserInfo(item.firstName, item.lastName);
-    userInfo.setUserInfo(item.firstName, item.lastName);
+    userInfo.addUserInfo(item.firstName, item.lastName);
   });
   openFormAutor.setEventListeners();
 
@@ -114,7 +96,38 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
 
    const delSubmit = new PopupWithSubmit(showDelPopup, submitDel, api);
 
+   const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
+    const item = {name: znacheniia.name, link: znacheniia.link, id: znacheniia.cardid}; //Взял из формы создания карточки name и link
 
+     const newCardApi = api.addTask(item); // Передал их в API, которая создаст объект на сервере, но не могу понять как теперь вернуть этот объект
+     newCardApi.then((item) => {
+
+      const cardElement = createCard(item); // создаю элемент
+
+      defaultCardList.setItemNewCard(cardElement); // отрисовываю карточку в начале списка
+    });
+
+     openFormCard.close();
+    });
+    openFormCard.setEventListeners();
+
+
+   const openFormAvatar = new PopupWithAvatar(showpopupAvatar, (znacheniia) => {
+    const item = (znacheniia.avatar);
+
+    api.patchUserAvatar(item);
+    userInfo.getUserInfo(item)
+  });
+
+
+    showbottonAvatar.addEventListener('click', () => {
+
+      openFormAvatar.open();
+     });
+  // ставим слушатели в попап
+    openFormAvatar.setEventListeners();
+
+  // слушаем клик по картинке аватара и открываем попап
 
 
 

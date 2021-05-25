@@ -11,6 +11,8 @@ export const formLissener = document.querySelector('form');
 
 export const closeFormBotton = document.querySelector('.popup__close');
 
+export const showpopupAvatar = '#popupAvatar';
+export const showbottonAvatar = document.querySelector('.profile__avatar');
 export const firstName = document.querySelector('#firstName');
 export const lastName = document.querySelector('#lastName');
 export const showpopupCard = '#popupCard';

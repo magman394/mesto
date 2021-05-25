@@ -12,6 +12,7 @@ export default class PopupWithForm extends Popup {
    this._cardValues = {};
     this._popupForm.querySelectorAll('.popup__input').forEach((input) => {
       this._cardValues[input.name] = input.value
+
     })
    return this._cardValues;
 
