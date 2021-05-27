@@ -37,11 +37,43 @@ export default class API {
         return res.json();
       }
         return Promise.reject('Произошла ошибка');
-    })
+    }).finally(() => {
+      renderLoading(false);
+      });
 
   }
   delmyCard(id) {
     return fetch(`${this._url + 'cards/'}${id}`,  {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+
+
+      }
+
+        return Promise.reject('Произошла ошибка');
+    })
+
+  }
+  likeCard(id) {
+    return fetch(`${this._url + 'cards/likes/'}${id}`,  {
+      method: "PUT",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+
+
+      }
+
+        return Promise.reject('Произошла ошибка');
+    })
+
+  }
+  dellikeCard(id) {
+    return fetch(`${this._url + 'cards/likes/'}${id}`,  {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
@@ -64,6 +96,32 @@ export default class API {
         return res.json();
       }
         return Promise.reject('Произошла ошибка');
-    })
+    }).finally(() => {
+      renderLoading(false);
+      });
+  }
+  patchUserAvatar(profileAvatar) {
+    return fetch(this._url + 'users/me/avatar', {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({avatar: profileAvatar}) }).then((res) => {
+      if (res.ok) {
+
+        return res.json();
+
+      }
+        return Promise.reject('Произошла ошибка');
+    }).finally(() => {
+      renderLoading(false);
+      });
+  }
+
+}
+
+function renderLoading(isLoading) {
+  if (isLoading) {
+    } else {
+      document.querySelector('.popup__submit').textContent = 'Сохранить...';
+
   }
 }

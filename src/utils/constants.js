@@ -11,6 +11,8 @@ export const formLissener = document.querySelector('form');
 
 export const closeFormBotton = document.querySelector('.popup__close');
 
+export const showpopupAvatar = '#popupAvatar';
+export const showbottonAvatar = document.querySelector('.profile__avatar');
 export const firstName = document.querySelector('#firstName');
 export const lastName = document.querySelector('#lastName');
 export const showpopupCard = '#popupCard';
@@ -27,6 +29,7 @@ export const firstNameContainer = '.profile__name';
 export const lastNameContainer = '.profile__profession';
 export const formAutor = document.querySelector('#formAutor');
 export const formCards = document.querySelector('#formCards');
+export const formAvatar = document.querySelector('#formAvatar');
 export const showFormBotton = document.querySelector('.profile__edit-botton');
 export const boxCardsForm = document.querySelector('.profile__add-botton');
 export const seveProfile = document.querySelector('#save');

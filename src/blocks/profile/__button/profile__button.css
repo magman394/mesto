@@ -1,0 +1,13 @@
+.profile__botton {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+
+  width: 26px;
+  height: 26px;
+
+  background-image: url("../../../images/pen.svg");
+}
+.profile__botton:hover {
+  opacity: 1;
+}

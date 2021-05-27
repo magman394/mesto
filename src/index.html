@@ -13,7 +13,10 @@
   </header>
   <main class="content">
     <section class="profile">
-        <img class="profile__avatar" src="" alt="аватарка">
+
+      <img class="profile__avatar opacity-link__avatar" src="" alt="аватарка">
+      <botton class="profile__botton" type="button"></botton>
+
         <div class="profile__profile-info">
           <div class="profile__edit-name">
             <h1 class="profile__name"></h1>
@@ -72,6 +75,17 @@
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
 </div>
+<div class="popup" id="popupAvatar">
+  <div class="popup__avatar-container">
+    <button type="button" class="popup__close opacity-link" id="closeCard"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
+    <form name="popup-profile" id="formAvatar" novalidate>
+      <h2 class="popup__title popup__title_color_black">Обновить аватар</h2>
+      <input name="link" id="inputLink" type="url" class="popup__input" required placeholder="Ссылка на картинку">
+      <span id="inputLink-error" class="popup__error"></span>
+      <button id="saveAvatar" type="submit" class="popup__submit">Сохранить</button>
+    </form>
+  </div>
+</div>
 <template id="boxCards">
   <div class="element" id="cardElement">
     <img id="cardLink" class="element__image" src="#" alt="фото">
@@ -81,7 +95,7 @@
     <div class="element__info">
       <h3 class="element__title" id="cardTitle"></h3>
       <div class="element__likes">
-        <button type="button" class="element__likes element__likes_like-btn"></button>
+        <button id="likebutton" type="button" class="element__likes element__likes_like-btn"></button>
         <p class="element__likes element__likes_like-count"></p>
       </div>
     </div>
