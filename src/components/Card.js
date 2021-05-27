@@ -32,7 +32,6 @@ export default class Card {
     //беру  массив с лайками и нахожу id людей, кто их ставил
       this._arrLikes.forEach(item => {
         this._arrLikeID = item._id
-        console.log(this._arrLikeID)
       });
       this._botton = this._element.querySelector('#likebutton');
       // если мой

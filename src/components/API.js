@@ -37,7 +37,9 @@ export default class API {
         return res.json();
       }
         return Promise.reject('Произошла ошибка');
-    })
+    }).finally(() => {
+      renderLoading(false);
+      });
 
   }
   delmyCard(id) {
@@ -94,18 +96,32 @@ export default class API {
         return res.json();
       }
         return Promise.reject('Произошла ошибка');
-    })
+    }).finally(() => {
+      renderLoading(false);
+      });
   }
   patchUserAvatar(profileAvatar) {
-    console.log(profileAvatar)
     return fetch(this._url + 'users/me/avatar', {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({avatar: profileAvatar}) }).then((res) => {
       if (res.ok) {
+
         return res.json();
+
       }
         return Promise.reject('Произошла ошибка');
-    })
+    }).finally(() => {
+      renderLoading(false);
+      });
+  }
+
+}
+
+function renderLoading(isLoading) {
+  if (isLoading) {
+    } else {
+      document.querySelector('.popup__submit').textContent = 'Сохранить...';
+
   }
 }

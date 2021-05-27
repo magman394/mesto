@@ -29,6 +29,7 @@ export const firstNameContainer = '.profile__name';
 export const lastNameContainer = '.profile__profession';
 export const formAutor = document.querySelector('#formAutor');
 export const formCards = document.querySelector('#formCards');
+export const formAvatar = document.querySelector('#formAvatar');
 export const showFormBotton = document.querySelector('.profile__edit-botton');
 export const boxCardsForm = document.querySelector('.profile__add-botton');
 export const seveProfile = document.querySelector('#save');

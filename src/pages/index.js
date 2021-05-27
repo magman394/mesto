@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
-import { showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, cardConteiner, delBotton, boxCardsForm, formAutor, formCards,
+import { formAvatar, showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, cardConteiner, delBotton, boxCardsForm, formAutor, formCards,
    configG, firstNameContainer, lastNameContainer,
     showpopupCard, boxCards, bigImg, showForm, showFormBotton, avatarProfile } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
@@ -13,14 +13,15 @@ import UserInfo from '../components/UserInfo.js';
 import API from '../components/API.js';
 
 
-
 const formAutorValidator = new FormValidator(configG, formAutor);
 formAutorValidator.removeFormErrorContainer();
 formAutorValidator.enableValidation();
 const formCardsValidator = new FormValidator(configG, formCards);
 formCardsValidator.removeFormErrorContainer();
 formCardsValidator.enableValidation();
-
+const formAvatarValidator = new FormValidator(configG, formAvatar);
+formAvatarValidator.removeFormErrorContainer();
+formAvatarValidator.enableValidation();
 function createCard(item) {
 
   const card = new Card(item.name, item.link, item.likes, item.owner._id, item._id,
@@ -43,6 +44,7 @@ api.getAllPromise().then((arg) => {
   userInfo.setUserInfo(getUserInfo.name, getUserInfo.about, getUserInfo.avatar);
   defaultCardList.renderItems(getAllTasks);
 }).catch((err) => alert(err));
+
 
 const defaultCardList = new Section({
   renderer: (item) => {
@@ -74,6 +76,7 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
     const item = {firstName: znacheniia.firstName, lastName: znacheniia.lastName}
     api.patchUserInfo(item.firstName, item.lastName);
     userInfo.addUserInfo(item.firstName, item.lastName);
+
   });
   openFormAutor.setEventListeners();
 
@@ -89,6 +92,7 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
       firstName.value = body.name
       lastName.value = body.about
       formAutorValidator.removeFormErrorContainer();
+
       openFormAutor.open();
     });
 
@@ -105,9 +109,8 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
       const cardElement = createCard(item); // создаю элемент
 
       defaultCardList.setItemNewCard(cardElement); // отрисовываю карточку в начале списка
-    });
+    })
 
-     openFormCard.close();
     });
     openFormCard.setEventListeners();
 
@@ -123,6 +126,8 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
     showbottonAvatar.addEventListener('click', () => {
 
       openFormAvatar.open();
+      formAvatarValidator.removeFormErrorContainer();
+
      });
   // ставим слушатели в попап
     openFormAvatar.setEventListeners();
