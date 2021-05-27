@@ -1,9 +1,9 @@
-.opacity-link__avatar {
+.opacity-link_avatar {
   z-index: 2;
   opacity: 1;
   transition: opacity 0.4s ease-in-out;
 
 }
-.opacity-link__avatar:hover {
+.opacity-link_avatar:hover {
   opacity: 0.2;
 }
