@@ -14,7 +14,7 @@
   <main class="content">
     <section class="profile">
 
-      <img class="profile__avatar opacity-link__avatar" src="" alt="аватарка">
+      <img class="profile__avatar opacity-link__avatar" src="<%=require('./images/avatar-image.jpg')%>" alt="аватарка">
       <botton class="profile__botton" type="button"></botton>
 
         <div class="profile__profile-info">
@@ -59,7 +59,7 @@
   </div>
   <div class="popup" id="popupImage">
     <div class="popup__image-container">
-      <button type="button" class="popup__close popup__close_image opacity-link" id="closeImg"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
+      <button type="button" class="popup__close popup__close_image opacity-link"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
       <img class="popup__image" src="#" alt="фото">
       <h2 class="popup__title" id="popupTtl"></h2>
     </div>
@@ -67,7 +67,7 @@
   <div class="popup" id="popupDelCard">
     <div class="popup__container">
       <h2 class="popup__title popup__title_not_margin">Вы уверены?</h2>
-      <button type="button" class="popup__close popup__close_cards opacity-link" id="closeImg"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
+      <button type="button" class="popup__close popup__close_cards opacity-link"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
       <button id="deleteCard" type="submit" class="popup__submit popup__submit_mini_margin">Да</button>
     </div>
   </div>
@@ -77,11 +77,11 @@
 </div>
 <div class="popup" id="popupAvatar">
   <div class="popup__avatar-container">
-    <button type="button" class="popup__close opacity-link" id="closeCard"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
+    <button type="button" class="popup__close opacity-link" id="closeAvatar"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
     <form name="popup-profile" id="formAvatar" novalidate>
       <h2 class="popup__title popup__title_color_black">Обновить аватар</h2>
-      <input name="link" id="inputLink" type="url" class="popup__input" required placeholder="Ссылка на картинку">
-      <span id="inputLink-error" class="popup__error"></span>
+      <input name="link" id="AvatarLink" type="url" class="popup__input" required placeholder="Ссылка на картинку">
+      <span id="AvatarLink-error" class="popup__error"></span>
       <button id="saveAvatar" type="submit" class="popup__submit">Сохранить</button>
     </form>
   </div>
@@ -99,7 +99,7 @@
         <p class="element__likes element__likes_like-count"></p>
       </div>
     </div>
-
+  </div>
 </template>
 </body>
 </html>

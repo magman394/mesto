@@ -3,10 +3,9 @@ export const bigImgclose = document.querySelector('.popup__close_image');
 export const popupImg = document.querySelector('.popup__image');
 export const popupTitle = document.querySelector('#popupTtl');
 
-export const cardTitleInputValue = document.querySelector('#inputTitle');
-export const cardLinkInputValue = document.querySelector('#inputLink');
+
 export const seveCardBotton = document.querySelector('#formCards')
-export const closepopupCard = document.querySelector('#closeCard');
+export const closepopupCard = document.querySelector('.popup__close');
 export const formLissener = document.querySelector('form');
 
 export const closeFormBotton = document.querySelector('.popup__close');
