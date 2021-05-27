@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
-import { formAvatar, showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, cardConteiner, delBotton, boxCardsForm, formAutor, formCards,
+import { formAvatar, showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, boxCardsForm, formAutor, formCards,
    configG, firstNameContainer, lastNameContainer,
     showpopupCard, boxCards, bigImg, showForm, showFormBotton, avatarProfile } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
