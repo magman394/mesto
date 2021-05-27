@@ -1,12 +1,9 @@
-
-
-
 .opacity-link__avatar {
+  z-index: 2;
   opacity: 1;
   transition: opacity 0.4s ease-in-out;
 
 }
 .opacity-link__avatar:hover {
-  opacity: 0.6;
-  background-image: url("../../../images/pen.svg");
+  opacity: 0.2;
 }

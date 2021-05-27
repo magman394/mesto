@@ -1,0 +1,11 @@
+.profile__bottom {
+  position: absolute;
+  left: 110px;
+  z-index: 1;
+  width: 26px;
+  height: 26px;
+  background-image: url(http://ibelokopytov.ru/yandex/pen.svg);
+}
+.profile__bottom:hover {
+  opacity: 1;
+}
