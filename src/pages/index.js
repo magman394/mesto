@@ -8,7 +8,6 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithSubmit from '../components/PopupWithSubmit.js';
-import PopupWithAvatar from '../components/PopupWithAvatar.js';
 import UserInfo from '../components/UserInfo.js';
 import API from '../components/API.js';
 
@@ -39,7 +38,6 @@ const api = new API({
  });
 
 api.getAllPromise().then((arg) => {
-
   const [getUserInfo, getAllTasks] = arg;
   userInfo.setUserInfo(getUserInfo.name, getUserInfo.about, getUserInfo.avatar);
   defaultCardList.renderItems(getAllTasks);
@@ -72,14 +70,19 @@ const openImg = new PopupWithImage(bigImg)
 openImg.setEventListeners();
 const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfile)
 
-  const openFormAutor = new PopupWithForm(showForm, (znacheniia) => {
-    const item = {firstName: znacheniia.firstName, lastName: znacheniia.lastName}
-    api.patchUserInfo(item.firstName, item.lastName);
-    userInfo.addUserInfo(item.firstName, item.lastName);
+  const openFormAutor = new PopupWithForm(showForm, (data) => {
+    const item = {firstName: data.firstName, lastName: data.lastName};
 
-  });
-  openFormAutor.setEventListeners();
+    api.patchUserInfo(item.firstName, item.lastName).then(() => {
+      userInfo.addUserInfo(item.firstName, item.lastName)
+    })
+      .catch((res) => {`Ошибка: ${res.status}`})
+      .finally(() => {
+        renderLoading(false);
+      });
+    })
 
+    openFormAutor.setEventListeners();
 
  boxCardsForm.addEventListener('click', () => {
     formCardsValidator.removeFormErrorContainer();
@@ -87,21 +90,17 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
    });
    showFormBotton.addEventListener('click', () => {
     formAutorValidator.removeFormErrorContainer();
-    const allUserInfo = api.getUserInfo();
-    allUserInfo.then((body) => {
-      firstName.value = body.name
-      lastName.value = body.about
+    const allUserInfo = userInfo.getUserInfo();
+      firstName.value = allUserInfo.firstName
+      lastName.value = allUserInfo.lastName
       formAutorValidator.removeFormErrorContainer();
-
       openFormAutor.open();
-    });
-
    });
 
    const delSubmit = new PopupWithSubmit(showDelPopup, submitDel, api);
 
-   const openFormCard = new PopupWithForm(showpopupCard, (znacheniia) => {
-    const item = {name: znacheniia.name, link: znacheniia.link, id: znacheniia.cardid}; //Взял из формы создания карточки name и link
+   const openFormCard = new PopupWithForm(showpopupCard, (data) => {
+    const item = {name: data.name, link: data.link, id: data.cardid}; //Взял из формы создания карточки name и link
 
      const newCardApi = api.addTask(item); // Передал их в API, которая создаст объект на сервере, но не могу понять как теперь вернуть этот объект
      newCardApi.then((item) => {
@@ -115,18 +114,17 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
     openFormCard.setEventListeners();
 
 
-   const openFormAvatar = new PopupWithAvatar(showpopupAvatar, (znacheniia) => {
-    const item = (znacheniia.avatar);
+   const openFormAvatar = new PopupWithForm(showpopupAvatar, (data) => {
+    const item = (data.avatar);
 
     api.patchUserAvatar(item);
-    userInfo.getUserInfo(item)
+    userInfo.getUserAvatar(item)
   });
 
 
     showbottonAvatar.addEventListener('click', () => {
 
       openFormAvatar.open();
-      formAvatarValidator.removeFormErrorContainer();
 
      });
   // ставим слушатели в попап
@@ -134,7 +132,13 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
 
   // слушаем клик по картинке аватара и открываем попап
 
+  function renderLoading(isLoading) {
+    if (isLoading) {
+      } else {
+        document.querySelectorAll('.popup__submit').textContent = 'Сохранить...';
 
+    }
+  }
 
 
 

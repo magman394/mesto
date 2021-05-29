@@ -15,10 +15,13 @@ addUserInfo(firstName, lastName) {
   this._firstName.textContent = firstName;
   this._lastName.textContent = lastName;
 }
-getUserInfo(item) {
+getUserInfo() {
   this._userInfo = {};
   this._userInfo.firstName = this._firstName.textContent;
   this._userInfo.lastName = this._lastName.textContent;
+  return this._userInfo;
+}
+getUserAvatar(item) {
   this._avatar.src = item;
   return this._userInfo;
 }

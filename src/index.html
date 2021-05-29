@@ -76,10 +76,10 @@
   </footer>
 </div>
 <div class="popup" id="popupAvatar">
-  <div class="popup__avatar-container">
+  <div class="popup__container">
     <button type="button" class="popup__close opacity-link" id="closeAvatar"><img src="<%=require('./images/Close-Icon.svg')%>" alt="кнопка закрытия"></button>
-    <form name="popup-profile" id="formAvatar" novalidate>
-      <h2 class="popup__title popup__title_color_black">Обновить аватар</h2>
+    <form class="popup__form-avatar" id="formAvatar" novalidate>
+      <h2 class="popup__title popup__title_not_margin">Обновить аватар</h2>
       <input name="link" id="AvatarLink" type="url" class="popup__input" required placeholder="Ссылка на картинку">
       <span id="AvatarLink-error" class="popup__error"></span>
       <button id="saveAvatar" type="submit" class="popup__submit">Сохранить</button>

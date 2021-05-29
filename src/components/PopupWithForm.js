@@ -1,5 +1,5 @@
 import Popup from './Popup.js';
-import { formCards } from '../utils/constants.js';
+import { formCards, formAvatar } from '../utils/constants.js';
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, formSubmit){
     super(popupSelector);
@@ -12,6 +12,7 @@ export default class PopupWithForm extends Popup {
    this._cardValues = {};
     this._popupForm.querySelectorAll('.popup__input').forEach((input) => {
       this._cardValues[input.name] = input.value
+      this._cardValues['avatar'] = input.value
     })
    return this._cardValues;
 
@@ -26,6 +27,7 @@ export default class PopupWithForm extends Popup {
  }
  close() {
   formCards.reset();
+  formAvatar.reset();
    super.close();
  }
 }
