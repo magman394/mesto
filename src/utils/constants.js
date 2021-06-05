@@ -7,9 +7,10 @@ export const popupTitle = document.querySelector('#popupTtl');
 export const seveCardBotton = document.querySelector('#formCards')
 export const closepopupCard = document.querySelector('.popup__close');
 export const formLissener = document.querySelector('form');
-
+export const myID = '2f7202266f3b347a05adda12';
 export const closeFormBotton = document.querySelector('.popup__close');
-
+export const openedPopup = document.querySelector('.popup_is-opened');
+export const allSaveBotton = document.querySelectorAll('.popup__submit');
 export const showpopupAvatar = '#popupAvatar';
 export const showbottonAvatar = document.querySelector('.profile__avatar');
 export const firstName = document.querySelector('#firstName');
@@ -29,6 +30,7 @@ export const lastNameContainer = '.profile__profession';
 export const formAutor = document.querySelector('#formAutor');
 export const formCards = document.querySelector('#formCards');
 export const formAvatar = document.querySelector('#formAvatar');
+export const formDel = document.querySelector('#formDel');
 export const showFormBotton = document.querySelector('.profile__edit-botton');
 export const boxCardsForm = document.querySelector('.profile__add-botton');
 export const seveProfile = document.querySelector('#save');

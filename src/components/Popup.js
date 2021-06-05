@@ -9,8 +9,6 @@ export default class Popup {
   open() {
     this._section.classList.add('popup_is-opened');
     document.addEventListener('keydown', this._handleEscClose)
-    this._section.querySelector('.popup__submit').textContent = 'Сохранить';
-
   }
   close() {
     this._section.classList.remove('popup_is-opened');

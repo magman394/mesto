@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
-import { formAvatar, showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, boxCardsForm, formAutor, formCards,
+import { formDel, allSaveBotton, formAvatar, showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, boxCardsForm, formAutor, formCards,
    configG, firstNameContainer, lastNameContainer,
     showpopupCard, boxCards, bigImg, showForm, showFormBotton, avatarProfile } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
@@ -74,7 +74,8 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
     const item = {firstName: data.firstName, lastName: data.lastName};
 
     api.patchUserInfo(item.firstName, item.lastName).then(() => {
-      userInfo.addUserInfo(item.firstName, item.lastName)
+      userInfo.addUserInfo(item.firstName, item.lastName);
+      openFormAutor.close();
     })
       .catch((res) => {`Ошибка: ${res.status}`})
       .finally(() => {
@@ -97,28 +98,36 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
       openFormAutor.open();
    });
 
-   const delSubmit = new PopupWithSubmit(showDelPopup, submitDel, api);
-
+   const delSubmit = new PopupWithSubmit(showDelPopup, formDel, api);
+   delSubmit.setEventListeners();
    const openFormCard = new PopupWithForm(showpopupCard, (data) => {
-    const item = {name: data.name, link: data.link, id: data.cardid}; //Взял из формы создания карточки name и link
-
-     const newCardApi = api.addTask(item); // Передал их в API, которая создаст объект на сервере, но не могу понять как теперь вернуть этот объект
+    const item = {name: data.name, link: data.link, id: data.cardid};
+    const newCardApi = api.addTask(item);
      newCardApi.then((item) => {
-
-      const cardElement = createCard(item); // создаю элемент
-
-      defaultCardList.setItemNewCard(cardElement); // отрисовываю карточку в начале списка
+      const cardElement = createCard(item);
+      defaultCardList.setItemNewCard(cardElement);
+      openFormCard.close();
     })
-
+    .catch((res) => {`Ошибка: ${res.status}`})
+    .finally(() => {
+      renderLoading(false);
     });
+  });
     openFormCard.setEventListeners();
 
 
    const openFormAvatar = new PopupWithForm(showpopupAvatar, (data) => {
     const item = (data.avatar);
+    api.patchUserAvatar(item)
+    .then((item) => {
+      userInfo.getUserAvatar(item.avatar);
+      openFormAvatar.close();
+    })
+    .catch((res) => {`Ошибка: ${res.status}`})
+    .finally(() => {
+      renderLoading(false);
+    });
 
-    api.patchUserAvatar(item);
-    userInfo.getUserAvatar(item)
   });
 
 
@@ -127,15 +136,18 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
       openFormAvatar.open();
 
      });
-  // ставим слушатели в попап
     openFormAvatar.setEventListeners();
-
-  // слушаем клик по картинке аватара и открываем попап
 
   function renderLoading(isLoading) {
     if (isLoading) {
+      document.querySelectorAll('.popup__submit').forEach((input) => {
+        input.textContent = 'Сохранить'
+      })
       } else {
-        document.querySelectorAll('.popup__submit').textContent = 'Сохранить...';
+        document.querySelectorAll('.popup__submit').forEach((input) => {
+          input.textContent = 'Сохранить...'
+
+        })
 
     }
   }

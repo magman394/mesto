@@ -1,5 +1,4 @@
 .opacity-link_avatar {
-  z-index: 2;
   opacity: 1;
   transition: opacity 0.4s ease-in-out;
 

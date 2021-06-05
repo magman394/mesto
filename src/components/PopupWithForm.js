@@ -1,5 +1,5 @@
 import Popup from './Popup.js';
-import { formCards, formAvatar } from '../utils/constants.js';
+import { formDel, formCards, formAvatar } from '../utils/constants.js';
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, formSubmit){
     super(popupSelector);
@@ -22,9 +22,17 @@ export default class PopupWithForm extends Popup {
    this._section.addEventListener('submit', (evt) =>{
      evt.preventDefault();
      this._formSubmit(this._getImputValues());
-     this.close();
    })
  }
+ open() {
+  document.querySelectorAll('.popup__submit').forEach((input) => {
+    input.textContent = 'Сохранить'
+
+  })
+
+  super.open();
+}
+
  close() {
   formCards.reset();
   formAvatar.reset();
