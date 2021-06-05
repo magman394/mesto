@@ -1,4 +1,4 @@
-
+import { myID } from '../utils/constants.js';
 export default class Card {
   constructor(name, link, likes, _id, cardid, cardSelector, handleCardClick, delSubmit, api, arrlikes) {
       this._title = name;
@@ -27,21 +27,22 @@ export default class Card {
     this._imageCard.addEventListener('click', () => {
      this._handleCardClick();
     });
-    // ставлю слушатель на кнопку лайка
     this._cardLike.addEventListener('click', () => {
-    //беру  массив с лайками и нахожу id людей, кто их ставил
       this._arrLikes.forEach(item => {
         this._arrLikeID = item._id
       });
       this._botton = this._element.querySelector('#likebutton');
-      // если мой
+
       if (this._botton.classList.contains('element__likes_active'))
-      { this._api.dellikeCard(this._cardid)
+      { this._api.dellikeCard(this._cardid).then(() => {
         this._dellike();
-      // если моего нет
+      }).catch((err) => alert(err));
+
       } else {
-        this._api.likeCard(this._cardid);
-        this._addlike();
+        this._api.likeCard(this._cardid).then(() => {
+          this._addlike();
+        }).catch((err) => alert(err));
+
       }
      });
       this._cardDel.addEventListener('click', () => {
@@ -52,19 +53,17 @@ export default class Card {
   _mylike() {
 
     this._arrLikes.forEach(item => {
-      if (item._id === '2f7202266f3b347a05adda12') {
+      if (item._id === myID) {
         this._cardLike.classList.add('element__likes_active');
       } else {
         this._cardLike.classList.remove('element__likes_active');
       }
     });
   }
-    // меняю цвет лайка, отнимаю от суммы 1 лайк и удаляю лайк с сервера
   _dellike() {
         this._cardLike.classList.toggle('element__likes_active');
         this._allLikes.textContent = this._likes.length -= 1;
 }
-    // меняю цвет лайка, прибавляю к сумме 1 лайк и отпраляю пут на добавление
   _addlike() {
     this._cardLike.classList.toggle('element__likes_active');
     this._allLikes.textContent = this._likes.length += 1;
@@ -74,7 +73,7 @@ export default class Card {
   _whatiscard() {
     this._cardDel = this._element.querySelector('.element__btn_delete');
     this._bottonDel = this._cardDel.querySelector('#bottonDel')
-    if (this._id === '2f7202266f3b347a05adda12') {
+    if (this._id === myID) {
 
       this._cardDel.classList.remove('element__btn');
       this._cardDel.classList.add('element__btn_delete');
@@ -90,7 +89,7 @@ export default class Card {
     this._api.delmyCard(this._cardid)
     .then(() => {
       this._element.remove();
-
+      this._popupopen.close();
     }).catch((err) => alert(err));
   })
    }

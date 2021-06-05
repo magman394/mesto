@@ -9,8 +9,10 @@ export default class Popup {
   open() {
     this._section.classList.add('popup_is-opened');
     document.addEventListener('keydown', this._handleEscClose)
-    document.querySelector('.popup__submit').textContent = 'Сохранить';
-
+    this._section.addEventListener('mousedown', (event) => {
+      if (event.target === this._section)
+      this._section.classList.remove('popup_is-opened');
+     });
   }
   close() {
     this._section.classList.remove('popup_is-opened');
@@ -26,9 +28,8 @@ export default class Popup {
     this._section.querySelector('.popup__close').addEventListener('click', () => {
       this.close();
      });
-     this._section.querySelector('.popup__close').addEventListener('mousedown', () => {
-      this.close();
-     });
+
+
   }
 }
 
