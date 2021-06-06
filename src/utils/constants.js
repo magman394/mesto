@@ -3,11 +3,12 @@ export const bigImgclose = document.querySelector('.popup__close_image');
 export const popupImg = document.querySelector('.popup__image');
 export const popupTitle = document.querySelector('#popupTtl');
 
-
+export const saveAutor = document.querySelector('#saveAutor')
+export const saveCard = document.querySelector('#saveCard')
+export const saveAvatar = document.querySelector('#saveAvatar')
 export const seveCardBotton = document.querySelector('#formCards')
 export const closepopupCard = document.querySelector('.popup__close');
 export const formLissener = document.querySelector('form');
-export const myID = '2f7202266f3b347a05adda12';
 export const closeFormBotton = document.querySelector('.popup__close');
 export const openedPopup = document.querySelector('.popup_is-opened');
 export const allSaveBotton = document.querySelectorAll('.popup__submit');
@@ -42,4 +43,4 @@ export const configG =
    submitButtonSelector: '.popup__submit',
    inactiveButtonClass: 'popup__submit_invalid',
    inputErrorClass: 'popup__input_type_error',
-   errorClass: 'popup__error_visible'}
+   errorClass: 'popup__input-error_visible'}

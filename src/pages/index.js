@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
-import { formDel, allSaveBotton, formAvatar, showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, boxCardsForm, formAutor, formCards,
+import { formDel, saveAutor, saveCard, saveAvatar, formAvatar, showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, boxCardsForm, formAutor, formCards,
    configG, firstNameContainer, lastNameContainer,
     showpopupCard, boxCards, bigImg, showForm, showFormBotton, avatarProfile } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
@@ -22,10 +22,9 @@ const formAvatarValidator = new FormValidator(configG, formAvatar);
 formAvatarValidator.removeFormErrorContainer();
 formAvatarValidator.enableValidation();
 function createCard(item) {
-
   const card = new Card(item.name, item.link, item.likes, item.owner._id, item._id,
     boxCards, () => {openImg.open(item);},
-    delSubmit, api, item.likes);
+    delSubmit, api, item.likes, userInfo);
 return card.generateCard(item);
 }
 
@@ -39,7 +38,7 @@ const api = new API({
 
 api.getAllPromise().then((arg) => {
   const [getUserInfo, getAllTasks] = arg;
-  userInfo.setUserInfo(getUserInfo.name, getUserInfo.about, getUserInfo.avatar);
+  userInfo.setUserInfo(getUserInfo.name, getUserInfo.about, getUserInfo.avatar, getUserInfo._id);
   defaultCardList.renderItems(getAllTasks);
 }).catch((err) => alert(err));
 
@@ -75,7 +74,9 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
 
     api.patchUserInfo(item.firstName, item.lastName).then(() => {
       userInfo.addUserInfo(item.firstName, item.lastName);
+      saveAutor.textContent = 'Сохранение...';
       openFormAutor.close();
+
     })
       .catch((res) => {`Ошибка: ${res.status}`})
       .finally(() => {
@@ -106,7 +107,9 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
      newCardApi.then((item) => {
       const cardElement = createCard(item);
       defaultCardList.setItemNewCard(cardElement);
+      saveCard.textContent = 'Сохранение...';
       openFormCard.close();
+
     })
     .catch((res) => {`Ошибка: ${res.status}`})
     .finally(() => {
@@ -121,6 +124,7 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
     api.patchUserAvatar(item)
     .then((item) => {
       userInfo.getUserAvatar(item.avatar);
+      saveAvatar.textContent = 'Сохранение...';
       openFormAvatar.close();
     })
     .catch((res) => {`Ошибка: ${res.status}`})
@@ -140,15 +144,9 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
 
   function renderLoading(isLoading) {
     if (isLoading) {
-      document.querySelectorAll('.popup__submit').forEach((input) => {
-        input.textContent = 'Сохранить'
-      })
       } else {
-        document.querySelectorAll('.popup__submit').forEach((input) => {
-          input.textContent = 'Сохранить...'
-
-        })
-
+        const openPopup = document.querySelector('.popup_is-opened');
+        openPopup.querySelector('.popup__submit').textContent = 'Сохранить'
     }
   }
 

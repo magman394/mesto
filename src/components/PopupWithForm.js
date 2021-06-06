@@ -1,10 +1,11 @@
 import Popup from './Popup.js';
-import { formDel, formCards, formAvatar } from '../utils/constants.js';
+
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, formSubmit){
     super(popupSelector);
     this._formSubmit = formSubmit;
     this._popupForm = this._section.querySelector('.popup__container');
+    this._form = this._section.querySelector('form');
 
   }
 
@@ -25,17 +26,13 @@ export default class PopupWithForm extends Popup {
    })
  }
  open() {
-  document.querySelectorAll('.popup__submit').forEach((input) => {
-    input.textContent = 'Сохранить'
 
-  })
 
   super.open();
 }
 
  close() {
-  formCards.reset();
-  formAvatar.reset();
+  this._form.reset();
    super.close();
  }
 }
