@@ -6,10 +6,11 @@ export default class UserInfo {
 
 }
 
-setUserInfo(firstName, lastName, avatar) {
+setUserInfo(firstName, lastName, avatar, myid) {
   this._firstName.textContent = firstName;
   this._lastName.textContent = lastName;
   this._avatar.src = avatar;
+  this._myid = myid
 }
 addUserInfo(firstName, lastName) {
   this._firstName.textContent = firstName;

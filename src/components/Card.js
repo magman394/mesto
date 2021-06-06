@@ -1,6 +1,6 @@
-import { myID } from '../utils/constants.js';
+
 export default class Card {
-  constructor(name, link, likes, _id, cardid, cardSelector, handleCardClick, delSubmit, api, arrlikes) {
+  constructor(name, link, likes, _id, cardid, cardSelector, handleCardClick, delSubmit, api, arrlikes, myid) {
       this._title = name;
       this._link = link;
       this._likes = likes;
@@ -11,7 +11,7 @@ export default class Card {
       this._api = api;
       this._popupopen = delSubmit;
       this._arrLikes = arrlikes;
-
+      this._myid = myid._myid;
 
   }
   _getTemplate() {
@@ -51,9 +51,8 @@ export default class Card {
 
     }
   _mylike() {
-
     this._arrLikes.forEach(item => {
-      if (item._id === myID) {
+      if (item._id === this._myid) {
         this._cardLike.classList.add('element__likes_active');
       } else {
         this._cardLike.classList.remove('element__likes_active');
@@ -73,7 +72,7 @@ export default class Card {
   _whatiscard() {
     this._cardDel = this._element.querySelector('.element__btn_delete');
     this._bottonDel = this._cardDel.querySelector('#bottonDel')
-    if (this._id === myID) {
+    if (this._id === this._myid) {
 
       this._cardDel.classList.remove('element__btn');
       this._cardDel.classList.add('element__btn_delete');
