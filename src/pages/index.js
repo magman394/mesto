@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
-import { formDel, saveAutor, saveCard, saveAvatar, formAvatar, showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, boxCardsForm, formAutor, formCards,
+import { openedPopup, formDel, saveAutor, saveCard, saveAvatar, formAvatar, showbottonAvatar, showpopupAvatar, showDelPopup, submitDel, boxCardsForm, formAutor, formCards,
    configG, firstNameContainer, lastNameContainer,
     showpopupCard, boxCards, bigImg, showForm, showFormBotton, avatarProfile } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
@@ -71,16 +71,16 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
 
   const openFormAutor = new PopupWithForm(showForm, (data) => {
     const item = {firstName: data.firstName, lastName: data.lastName};
-
+    renderLoading(saveAutor, true);
     api.patchUserInfo(item.firstName, item.lastName).then(() => {
       userInfo.addUserInfo(item.firstName, item.lastName);
-      saveAutor.textContent = 'Сохранение...';
+
       openFormAutor.close();
 
     })
       .catch((res) => {`Ошибка: ${res.status}`})
       .finally(() => {
-        renderLoading(false);
+        renderLoading(saveAutor, false);
       });
     })
 
@@ -103,17 +103,17 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
    delSubmit.setEventListeners();
    const openFormCard = new PopupWithForm(showpopupCard, (data) => {
     const item = {name: data.name, link: data.link, id: data.cardid};
+    renderLoading(saveCard, true);
     const newCardApi = api.addTask(item);
      newCardApi.then((item) => {
       const cardElement = createCard(item);
       defaultCardList.setItemNewCard(cardElement);
-      saveCard.textContent = 'Сохранение...';
       openFormCard.close();
 
     })
     .catch((res) => {`Ошибка: ${res.status}`})
     .finally(() => {
-      renderLoading(false);
+      renderLoading(saveCard, false);
     });
   });
     openFormCard.setEventListeners();
@@ -121,15 +121,15 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
 
    const openFormAvatar = new PopupWithForm(showpopupAvatar, (data) => {
     const item = (data.avatar);
+    renderLoading(saveAvatar, true);
     api.patchUserAvatar(item)
     .then((item) => {
       userInfo.getUserAvatar(item.avatar);
-      saveAvatar.textContent = 'Сохранение...';
       openFormAvatar.close();
     })
     .catch((res) => {`Ошибка: ${res.status}`})
     .finally(() => {
-      renderLoading(false);
+      renderLoading(saveAvatar, false);
     });
 
   });
@@ -142,11 +142,11 @@ const userInfo = new UserInfo(firstNameContainer, lastNameContainer, avatarProfi
      });
     openFormAvatar.setEventListeners();
 
-  function renderLoading(isLoading) {
+  function renderLoading(save, isLoading) {
+    save.textContent = 'Сохранение...';
     if (isLoading) {
       } else {
-        const openPopup = document.querySelector('.popup_is-opened');
-        openPopup.querySelector('.popup__submit').textContent = 'Сохранить'
+        save.textContent = 'Сохранить'
     }
   }
 
