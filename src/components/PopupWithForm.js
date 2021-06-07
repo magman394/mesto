@@ -25,11 +25,6 @@ export default class PopupWithForm extends Popup {
      this._formSubmit(this._getImputValues());
    })
  }
- open() {
-
-
-  super.open();
-}
 
  close() {
   this._form.reset();
